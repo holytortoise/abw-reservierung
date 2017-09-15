@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titel %}{{user.username}}{% endblock titel %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/reservierung.css' %}">
+{% endblock head %}
+{% block content %}
+<div class="wrapper">
+<h1 class="last">{{user.username}}</h1>
+</div>
+
+{% for room in rooms_return  %}
+  {% for reserv in room  %}
+    {% if forloop.first %}
+    <div class="wrapper">
+      <h2 class="top">{{ reserv.reservierterRaum }}</h2>
+      </div>
+      <table class="table table-bordered">
+        <thead>
+          <th>von</th>
+          <th>Grund</th>
+          <th>Anfang</th>
+          <th>Ende</th>
+          <th>Täglich</th>
+          <th>Details</th>
+        </thead>
+        <tbody>
+  {% endif %}
+  <tr>
+    <td id="r_von">{{ reserv.reserviert_von }}</td>
+    <td id="r_grund">{{ reserv.reservierungsGrund }}</td>
+    <td id="r_anfang">{{ reserv.anfangsDatum|date:"j N o"}} {{ reserv.anfangsZeit|date:"G" }}:{{reserv.anfangsZeit|date:"i" }}</td>
+    <td id="r_ende">{{ reserv.endDatum|date:"j N o" }} {{ reserv.endZeit|date:"G" }}:{{ reserv.endZeit|date:"i" }}</td>
+    {% if reserv.taeglich %}
+        <td>Ja</td>
+        {% else %}
+        <td>Nein</td>
+    {% endif %}
+
+    <td id="r_details"><a href="{% url 'reservierung:reservierung-detail' pk=reserv.id %}"><span class="glyphicon glyphicon-info-sign"></span> Details</a></td>
+  </tr>
+  {% if forloop.last %}
+  </tbody>
+</table>
+  {% endif %}
+  {% endfor %}
+{% endfor %}
+
+{% endblock content %}

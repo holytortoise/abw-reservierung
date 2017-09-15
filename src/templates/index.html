@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load staticfiles %}
+{% block titel %}Home{% endblock titel %}
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/reservierung.css' %}">
+{% endblock head %}
+{% block content %}
+
+<div class="wrapper">
+  <h1 class="top">Reservierungen</h1>
+  <h2 class="kw">KW {{ woche }} {{ jahr }}</h2>
+  <form class="last" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="woche" value="{{woche}}">
+    <input type="hidden" name="jahr" value="{{jahr}}">
+    <button class="btn btn-primary" type="submit" name="last_week"><span class="glyphicon glyphicon-arrow-left"></span></button>
+
+  </form>
+  <form class="next" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="woche" value="{{woche}}">
+    <input type="hidden" name="jahr" value="{{jahr}}">
+    <button class="btn btn-primary" type="submit" name="next_week"><span class="glyphicon glyphicon-arrow-right"></span></button>
+  </form>
+</div>
+{% if rooms_return is None %}
+<div class="wrapper">
+    <h2 class="top">Keine Reservierungen</h2>
+  </div>
+{% else %}
+  {% for room in rooms_return  %}
+    {% for reserv in room  %}
+      {% if forloop.first %}
+      <div class="wrapper">
+        <h2 class="top">{{ reserv.reservierterRaum }}</h2>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <th>von</th>
+            <th>Grund</th>
+            <th>Anfang</th>
+            <th>Ende</th>
+            <th>Täglich</th>
+            <th>Details</th>
+          </thead>
+          <tbody>
+    {% endif %}
+    <tr>
+      <td id="r_von">{{ reserv.reserviert_von }}</td>
+      <td id="r_grund">{{ reserv.reservierungsGrund }}</td>
+      <td id="r_anfang">{{ reserv.anfangsDatum }} {{ reserv.anfangsZeit|date:"G" }}:{{reserv.anfangsZeit|date:"i" }}</td>
+      <td id="r_ende">{{ reserv.endDatum }} {{ reserv.endZeit|date:"G" }}:{{ reserv.endZeit|date:"i" }}</td>
+      {% if reserv.taeglich %}
+          <td>Ja</td>
+          {% else %}
+          <td>Nein</td>
+      {% endif %}
+
+      <td id="r_details"><a href="{% url 'reservierung:reservierung-detail' pk=reserv.id %}"><span class="glyphicon glyphicon-info-sign"></span> Details</a></td>
+    </tr>
+    {% if forloop.last %}
+    </tbody>
+  </table>
+    {% endif %}
+    {% endfor %}
+  {% endfor %}
+{% endif %}
+{% endblock content %}
