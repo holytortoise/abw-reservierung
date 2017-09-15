@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>{% block titel %}{% endblock titel %}</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="{% static 'jquery/jquery-3.2.1.min.js' %}"></script>
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    {% block head %}{% endblock head %}
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse"
+            data-target=".navbar-collapse" name="button">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <li>{% block brand %}<a class="navbar-brand"
+             href="{% url 'schilder:schilder-list' %}">Home</a>{% endblock brand %}</li>
+        </div>
+        <div class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li>{% block reservierung %}{% endblock reservierung %}</li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            {% if user.is_authenticated %}
+              <li class="navbar-text">{{user.username}}</li>
+              <li>{% block logout %}<a href="{% url 'schilder:logout' room=1 %}"><span class="glyphicon glyphicon-user"></span> Logout</a>{% endblock logout %}</li>
+            {% else %}
+              <li>{% block login %}<a href="{% url 'schilder:login' room=1 %}"><span class="glyphicon glyphicon-user"></span> Login</a>{% endblock login %}</li>
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container">
+      <div class="jumbotron">
+        {% block content %}
+          <h1>Platzhalter</h1>
+        {% endblock content %}
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+{% extends "base.html" %}
+{% load account_tags %}
+{% block titel %}Reservierungsdetails{% endblock titel %}
+{% block content %}
+
+  <h2>Reservierter Raum: {{reservierung.reservierterRaum}}</h2>
+  <h3>Reserviert von: {{reservierung.reserviert_von}}</h3>
+  <h3>Reservierungs Grund: {{reservierung.reservierungsGrund}}</h3>
+  <h3>Von {{reservierung.anfangsDatum|date:"j N o"}} {{reservierung.anfangsZeit|time:"H:i"}} bis
+  {{reservierung.endDatum|date:"j N o"}} {{reservierung.endZeit|time:"H:i"}}</h3>
+  {% if user|is_creator:reservierung.reserviert_von or user.is_superuser %}
+    <a class="btn btn-warning" href="{% url 'reservierung:reservierung-update' pk=reservierung.id %}"><span class="glyphicon glyphicon-pencil"></span> Update</a>
+    <a class="btn btn-danger" href="{% url 'reservierung:delete' pk=reservierung.id %}"><span class="glyphicon glyphicon-trash"></span> Löschen</a>
+  {% else %}
+    <br>
+    <h3>Nur der Ersteller kann verändern oder löschen</h3>
+  {% endif %}
+
+
+{% endblock content %}
