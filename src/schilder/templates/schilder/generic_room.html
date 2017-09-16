@@ -66,15 +66,15 @@
   });
 
   function refresh() {
-    if(new Date().getTime() - time >= 300000) {
+    if(new Date().getTime() - time >= 60000) {
       $("#woche").val($("#current_week").val());
       $("#jahr").val($("#current_year").val());
       window.location.assign(window.location.href);
     }
     else
-      setTimeout(refresh, 300000);
+      setTimeout(refresh, 60000);
   }
-  setTimeout(refresh,300000);
+  setTimeout(refresh,60000);
 
   function startTime(){
     var today = new Date();

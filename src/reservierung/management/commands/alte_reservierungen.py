@@ -11,16 +11,13 @@ from reservierung import models
 
 
 class Command(BaseCommand):
-    help = 'Scheduler für alle Wiederkehrenden Aktivitäten auf dem Server'
+    help = 'Entfernen der alten Reservierungen'
 
     def add_arguments(self, parser):
         pass
 
     def handle(self, *args, **options):
-        scheduler = BlockingScheduler()
-        scheduler.add_job(alte_reservierungen, 'cron',
-                          day_of_week='mon-fri', hour=17)
-        scheduler.start()
+        alte_reservierungen()
 
 
 def alte_reservierungen():
