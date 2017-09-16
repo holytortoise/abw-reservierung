@@ -5,13 +5,13 @@ def update():
     """
     Automatisches Update des Reservierungssystems über Github
     """
-    os.system('sudo supervisorctl stop abwreservierung && git pull -b development https://github.com/holytortoise/abwreservierung.git && sudo supervisorctl start abwreservierung')
+    os.system('sudo supervisorctl stop abwreservierung && git pull && sudo supervisorctl start abwreservierung')
 
 def alte_reservierungen():
     """
     Automatisches entfernen der alten Reservierungen
     """
-    os.system('cd src && python manage.py alte_reservierungen')
+    os.system('source /home/webserver/django-server/bin/activate && cd src && python manage.py alte_reservierungen')
 
 s_update = BlockingScheduler()
 s_update.add_job(update, 'cron', day_of_week='sun', hour=12)
