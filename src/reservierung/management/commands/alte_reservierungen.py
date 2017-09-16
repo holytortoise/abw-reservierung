@@ -5,7 +5,7 @@ import time
 from django.core.management.base import BaseCommand, CommandError
 from django.db import models as m
 
-from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 from reservierung import models
 
@@ -17,17 +17,10 @@ class Command(BaseCommand):
         pass
 
     def handle(self, *args, **options):
-        scheduler = BackgroundScheduler()
+        scheduler = BlockingScheduler()
         scheduler.add_job(alte_reservierungen, 'cron',
                           day_of_week='mon-fri', hour=17)
-        scheduler.add_job(print_current_time, 'interval', seconds=5)
         scheduler.start()
-
-        try:
-            while True:
-                time.sleep(2)
-        except (KeyboardInterrupt, SystemExit):
-            scheduler.shutdown()
 
 
 def alte_reservierungen():

@@ -38,9 +38,12 @@ class Reservierung(models.Model):
 
     def create_choice(self):
         choice = []
-        rooms = Raum.objects.all()
-        for room in rooms:
-            choice.append((room.id, room.get_name()))
+        try:
+            rooms = Raum.objects.all()
+            for room in rooms:
+                choice.append((room.id, room.get_name()))
+        except:
+            pass
         return choice
 
     def __str__(self):
