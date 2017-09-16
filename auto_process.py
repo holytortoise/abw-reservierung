@@ -5,7 +5,7 @@ def update():
     """
     Automatisches Update des Reservierungssystems über Github
     """
-    os.system('sudo supervisorctl stop abwreservierung && git pull && sudo supervisorctl start abwreservierung')
+    os.system('sudo supervisorctl stop abwreservierung && git pull && sudo supervisorctl start abwreservierung && sudo chmod +x startup')
 
 def alte_reservierungen():
     """
