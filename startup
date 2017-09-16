@@ -1,0 +1,3 @@
+#!/bin/bash
+source ../django-server/bin/activate
+python auto_process.py
