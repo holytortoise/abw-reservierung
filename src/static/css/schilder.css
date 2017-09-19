@@ -6,7 +6,7 @@
 
 .raum-name {
   grid-column-start: 1;
-  grid-column-end: 5;
+  grid-column-end: 3;
   grid-row: 1;
   justify-self: center;
   margin: auto;
