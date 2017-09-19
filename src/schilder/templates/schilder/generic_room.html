@@ -41,11 +41,13 @@
   <button class="last btn btn-primary" type="submit" name="last_week"><span class="glyphicon glyphicon-arrow-left"></span></button>
   <button class="next btn btn-primary" type="submit" name="next_week"><span class="glyphicon glyphicon-arrow-right"></span></button>
 </form>
+
 </div>
 <br>
 <table class="table table-bordered">
   <thead>
     <th>Von</th>
+    <th>Grund</th>
     <th>Beginn</th>
     <th>Ende</th>
     <th>Details</th>
@@ -53,6 +55,7 @@
 {% for reservierung  in reservierungen %}
     <tr>
       <td><h4>{{reservierung.reserviert_von}}</h4></td>
+      <td><h4>{{reservierung.reservierungsGrund}}</h4></td>
       <td><h4>{{reservierung.anfangsDatum|date:"j N o"}} {% if reservierung.anfangsZeit is None %}
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>
       <td><h4>{{reservierung.endDatum|date:"j N o"}} {% if reservierung.endZeit is None %}

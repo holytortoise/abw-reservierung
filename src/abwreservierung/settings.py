@@ -25,7 +25,7 @@ TEMPLATE_RESERVIERUNG_DIR = os.path.join(BASE_DIR, 'reservierung/templates')
 # Tempates für die interaktiven Türschilder
 TEMPLATE_SCHILDER_DIR = os.path.join(BASE_DIR, 'schilder/templates')
 # Static Files
-STATIC_DIR = os.path.join(BASE_DIR, 'static_root')
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
