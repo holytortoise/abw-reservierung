@@ -26,7 +26,9 @@
 
 <div class="wrapper">
   <h1 class="raum-name">{{raum.nummer}}.{{raum.name}}</h1>
+  {% comment %}
   <h2 class="datum"><span>{% now "j N o" %}</span></h2><h2 class="zeit"><span id="uhr"></span></h2>
+  {% endcomment %}
   <br>
 <form class="form" method="post">
   {% csrf_token %}
