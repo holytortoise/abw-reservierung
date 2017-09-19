@@ -56,9 +56,9 @@
     <tr>
       <td><h4>{{reservierung.reserviert_von}}</h4></td>
       <td><h4>{{reservierung.reservierungsGrund}}</h4></td>
-      <td><h4>{{reservierung.anfangsDatum|date:"j N o"}} {% if reservierung.anfangsZeit is None %}
+      <td><h4>{{reservierung.anfangsDatum|date:"j m o"}} {% if reservierung.anfangsZeit is None %}
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>
-      <td><h4>{{reservierung.endDatum|date:"j N o"}} {% if reservierung.endZeit is None %}
+      <td><h4>{{reservierung.endDatum|date:"j m o"}} {% if reservierung.endZeit is None %}
         {% else %} {{reservierung.endZeit|time:"H:i"}} {% endif %}</h4></td>
       <td><h4><a href="{% url 'schilder:reserv-detail' pk=reservierung.id %}">Details</a></h4></h4></td>
     </tr>
