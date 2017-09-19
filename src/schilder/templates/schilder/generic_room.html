@@ -17,11 +17,10 @@
 {% block user %}<a href="{% url 'schilder:user-reserv' pk=current_room.id %}">{{user.username}}</a>{% endblock user %}
 {% block logout %}<a href="{% url 'schilder:logout' room=raum.id %}"><span class="glyphicon glyphicon-user"></span> Logout</a>{% endblock logout %}
 {% block login %}<a href="{% url 'schilder:login' room=raum.id %}">Login</a>{% endblock login %}
+{% block content %}
 {% block nav-right %}
   <li class="navbar-text"><span>{% now "j N o" %}</span><span id="uhr"></span></li>
 {% endblock nav-right %}
-{% block content %}
-
 <div class="wrapper">
   <h1 class="raum-name">{{raum.nummer}}.{{raum.name}}</h1>
   {% comment %}
