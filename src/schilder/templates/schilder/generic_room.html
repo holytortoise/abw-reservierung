@@ -38,7 +38,7 @@
   <input id="jahr" type="hidden" name="jahr" value="{{jahr}}">
   <input id='current_week' type="hidden" name="current_week" value="{{current_week}}">
   <input id='current_year' type="hidden" name="current_year" value="{{current_year}}">
-  {% if is_week %}
+  {% if not is_week %}
   <button class="last btn btn-primary" type="submit" name="last_week"><span class="glyphicon glyphicon-arrow-left"></span></button>
   {% endif %}
   <button class="next btn btn-primary" type="submit" name="next_week"><span class="glyphicon glyphicon-arrow-right"></span></button>
@@ -52,7 +52,9 @@
     <th>Grund</th>
     <th>Beginn</th>
     <th>Ende</th>
+    {% comment %}
     <th>Details</th>
+    {% endcomment %}
   </thead>
 {% for reservierung  in reservierungen %}
     <tr>
@@ -62,7 +64,9 @@
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>
       <td><h4>{{reservierung.endDatum|date:"j.m.o"}} {% if reservierung.endZeit is None %}
         {% else %} {{reservierung.endZeit|time:"H:i"}} {% endif %}</h4></td>
+      {% comment %}
       <td><h4><a href="{% url 'schilder:reserv-detail' pk=reservierung.id %}">Details</a></h4></h4></td>
+      {% endcomment %}
     </tr>
 {% endfor %}
 </table>
