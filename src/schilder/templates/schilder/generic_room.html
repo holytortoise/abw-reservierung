@@ -11,7 +11,7 @@
   <link rel="stylesheet" href="{% static 'css/schilder.css' %}">
 {% endblock head %}
 {% block brand %}<a class="navbar-brand" href="{% url 'schilder:schilder-detail' pk=raum.id %}">
-                {{raum.name}}</a>{% endblock brand %}
+                {{raum.nummer}}.{{raum.name}}</a>{% endblock brand %}
 {% block reservierung %}<a href="{% url 'schilder:reservierung' pk=raum.id %}">
   Reservierung</a>{% endblock reservierung %}
 {% block user %}<a href="{% url 'schilder:user-reserv' pk=current_room.id %}">{{user.username}}</a>{% endblock user %}
@@ -26,14 +26,14 @@
 
 
 <div class="wrapper">
-  <h1 class="raum-name">{{raum.nummer}}.{{raum.name}}</h1>
+  <h2 class="raum-name">{{raum.nummer}}.{{raum.name}}</h2>
   {% comment %}
   <h2 class="datum"><span>{% now "j N o" %}</span></h2><h2 class="zeit"><span id="uhr"></span></h2>
   {% endcomment %}
   <br>
 <form class="form" method="post">
   {% csrf_token %}
-  <h2 class="kw">KW {{ woche }} {{ jahr }}</h2>
+  <h3 class="kw">KW {{ woche }} {{ jahr }}</h3>
   <input id="woche" type="hidden" name="woche" value="{{woche}}">
   <input id="jahr" type="hidden" name="jahr" value="{{jahr}}">
   <input id='current_week' type="hidden" name="current_week" value="{{current_week}}">
