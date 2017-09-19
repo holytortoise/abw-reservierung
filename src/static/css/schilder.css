@@ -1,3 +1,7 @@
+body {
+  padding-bottom: 70px;
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
