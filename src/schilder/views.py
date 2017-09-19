@@ -40,9 +40,14 @@ def schilder_detail(request,pk):
     """
     current_week = datetime.date.today().isocalendar()[1]
     current_year = datetime.date.today().isocalendar()[0]
+    is_week = True
     if request.method == 'POST':
         jahr = int(request.POST['jahr'])
         woche = int(request.POST['woche'])
+        if woche == datetime.date.today().isocalendar()[1]:
+            is_week = True
+        else:
+            is_week = False
         if request.POST.__contains__('next_week'):
             if woche == datetime.date(jahr, 12, 28).isocalendar()[1]:
                 woche = 1
@@ -71,9 +76,8 @@ def schilder_detail(request,pk):
                 raum_frei = False
     context_dict = {'raum':raum,'reservierungen':reservierungen,
     'raum_frei':raum_frei,'woche':woche,'jahr':jahr,'current_week':current_week,
-    'current_year':current_year}
+    'current_year':current_year,'is_week':is_week}
     return render(request,'schilder/generic_room.html',context_dict)
-
 
 def schilder_login(request,room):
     """
@@ -93,7 +97,6 @@ def schilder_login(request,room):
         form = s_forms.SchilderLoginForm()
     return render(request, 'schilder/login.html',{'form':form,'current_room':current_room})
 
-
 def schilder_logout(request,room):
     """
     Logout welcher zurück zum entsprechenden Schild leitet
@@ -101,8 +104,6 @@ def schilder_logout(request,room):
     print("logout")
     logout(request)
     return redirect('schilder:schilder-detail', pk=int(room))
-
-# View um Reservierungen zu erstellen
 
 def reservierung_form(request,pk):
     """

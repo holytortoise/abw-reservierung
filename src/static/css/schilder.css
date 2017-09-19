@@ -1,6 +1,7 @@
 body {
   padding-top: 30px;
   padding-bottom: 70px;
+  overflow: hidden;
 }
 
 .wrapper {
