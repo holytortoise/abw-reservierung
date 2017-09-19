@@ -26,7 +26,7 @@
 
 
 <div class="wrapper">
-  <h2 class="raum-name">{{raum.nummer}}.{{raum.name}}</h2>
+  <h1 class="raum-name">{{raum.nummer}}.{{raum.name}}</h1>
   {% comment %}
   <h2 class="datum"><span>{% now "j N o" %}</span></h2><h2 class="zeit"><span id="uhr"></span></h2>
   {% endcomment %}
@@ -56,9 +56,9 @@
     <tr>
       <td><h4>{{reservierung.reserviert_von}}</h4></td>
       <td><h4>{{reservierung.reservierungsGrund}}</h4></td>
-      <td><h4>{{reservierung.anfangsDatum|date:"j m o"}} {% if reservierung.anfangsZeit is None %}
+      <td><h4>{{reservierung.anfangsDatum|date:"j.m.o"}} {% if reservierung.anfangsZeit is None %}
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>
-      <td><h4>{{reservierung.endDatum|date:"j m o"}} {% if reservierung.endZeit is None %}
+      <td><h4>{{reservierung.endDatum|date:"j.m.o"}} {% if reservierung.endZeit is None %}
         {% else %} {{reservierung.endZeit|time:"H:i"}} {% endif %}</h4></td>
       <td><h4><a href="{% url 'schilder:reserv-detail' pk=reservierung.id %}">Details</a></h4></h4></td>
     </tr>
