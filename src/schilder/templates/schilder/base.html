@@ -35,6 +35,7 @@
           </ul>
           <ul class="nav navbar-nav navbar-right">
             {% if user.is_authenticated %}
+            {% block nav-right %}{% endblock nav-right %}
               <li class="navbar-text">{{user.username}}</li>
               <li>{% block logout %}<a href="{% url 'schilder:logout' room=1 %}"><span class="glyphicon glyphicon-user"></span> Logout</a>{% endblock logout %}</li>
             {% else %}
