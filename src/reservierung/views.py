@@ -104,7 +104,7 @@ def index(request):
         is_week = True
     if woche != current_week or jahr != current_year:
         is_week = False
-        
+
     rooms = models.Raum.objects.all()
     rooms_return = []
     for room in rooms:
@@ -121,7 +121,10 @@ def index(request):
             rooms_return.append(room_return)
     if len(rooms_return) == 0:
         rooms_return = None
-    return render(request, 'index.html', {'rooms_return': rooms_return, 'woche': woche, 'jahr': jahr})
+    context_dict = {'raum':raum,'reservierungen':reservierungen,
+    'raum_frei':raum_frei,'woche':woche,'jahr':jahr,'current_week':current_week,
+    'current_year':current_year,'is_week':is_week}
+    return render(request, 'index.html', context_dict)
 
 # View um Reservierungen zu erstellen
 
