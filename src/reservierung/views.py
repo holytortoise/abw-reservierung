@@ -48,6 +48,7 @@ def index(request):
     Diese Funktion stellt auf der Index Seite die Tabelle für die aktuelle
     Woche. Und ermöglicht Durch die Wochen zu gehen
     """
+    """
     current_week = datetime.date.today().isocalendar()[1]
     is_week = None
     if request.method == 'POST':
@@ -72,6 +73,38 @@ def index(request):
         is_week = True
     if woche != current_week or jahr != current_year:
         is_week = False
+        """
+    current_week = datetime.date.today().isocalendar()[1]
+    current_year = datetime.date.today().isocalendar()[0]
+    is_week = None
+    if request.method == 'POST':
+        jahr = int(request.POST['jahr'])
+        woche = int(request.POST['woche'])
+        # Wurde der rechte Button für nächste Woche gedrückt wird woche um 1
+        # hochgezählt
+        if request.POST.__contains__('next_week'):
+            if woche == datetime.date(jahr, 12, 28).isocalendar()[1]:
+                woche = 1
+                jahr = jahr + 1
+            else:
+                woche = woche + 1
+        # Wurde der linke Button gedrückt wird Woche heruntergezählt
+        if request.POST.__contains__('last_week'):
+            if woche == 1:
+                jahr = jahr -1
+                woche = datetime.date(jahr,12,28).isocalendar()[1]
+            else:
+                woche = woche - 1
+
+    else:
+        jahr = datetime.date.today().isocalendar()[0]
+        woche = datetime.date.today().isocalendar()[1]
+    # Ergibt True wenn die aktuelle Woche gleich der auf dem Schild angezeigten ist
+    if woche == current_week and jahr == current_year:
+        is_week = True
+    if woche != current_week or jahr != current_year:
+        is_week = False
+        
     rooms = models.Raum.objects.all()
     rooms_return = []
     for room in rooms:
