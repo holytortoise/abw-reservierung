@@ -41,7 +41,7 @@ def schilder_detail(request,pk):
     # Aktuelle Woche und Jahr
     current_week = datetime.date.today().isocalendar()[1]
     current_year = datetime.date.today().isocalendar()[0]
-    is_week = True
+    is_week = None
     if request.method == 'POST':
         jahr = int(request.POST['jahr'])
         woche = int(request.POST['woche'])
@@ -63,7 +63,7 @@ def schilder_detail(request,pk):
         jahr = datetime.date.today().isocalendar()[0]
         woche = datetime.date.today().isocalendar()[1]
 
-    if woche >= current_week:
+    if woche == current_week:
         is_week = True
     else:
         is_week = False
