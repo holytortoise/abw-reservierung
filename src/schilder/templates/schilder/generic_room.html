@@ -38,7 +38,8 @@
   <input id="jahr" type="hidden" name="jahr" value="{{jahr}}">
   <input id='current_week' type="hidden" name="current_week" value="{{current_week}}">
   <input id='current_year' type="hidden" name="current_year" value="{{current_year}}">
-  {% if not is_week %}
+  {% if is_week %}
+  {% else %}
   <button class="last btn btn-primary" type="submit" name="last_week"><span class="glyphicon glyphicon-arrow-left"></span></button>
   {% endif %}
   <button class="next btn btn-primary" type="submit" name="next_week"><span class="glyphicon glyphicon-arrow-right"></span></button>

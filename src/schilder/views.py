@@ -38,13 +38,14 @@ def schilder_detail(request,pk):
     Startseite der Türschilder, liefert die Reservierungen
     für die aktuelle Woche zurück
     """
+    # Aktuelle Woche und Jahr
     current_week = datetime.date.today().isocalendar()[1]
     current_year = datetime.date.today().isocalendar()[0]
     is_week = True
     if request.method == 'POST':
         jahr = int(request.POST['jahr'])
         woche = int(request.POST['woche'])
-        if woche == datetime.date.today().isocalendar()[1]:
+        if woche == current_week:
             is_week = True
         else:
             is_week = False
