@@ -48,32 +48,6 @@ def index(request):
     Diese Funktion stellt auf der Index Seite die Tabelle für die aktuelle
     Woche. Und ermöglicht Durch die Wochen zu gehen
     """
-    """
-    current_week = datetime.date.today().isocalendar()[1]
-    is_week = None
-    if request.method == 'POST':
-        jahr = int(request.POST['jahr'])
-        woche = int(request.POST['woche'])
-        if request.POST.__contains__('next_week'):
-            if woche == datetime.date(jahr, 12, 28).isocalendar()[1]:
-                woche = 1
-                jahr = jahr + 1
-            else:
-                woche = woche + 1
-        if request.POST.__contains__('last_week'):
-            if woche == 1:
-                jahr = jahr - 1
-                woche = datetime.date(jahr, 12, 28).isocalendar()[1]
-            else:
-                woche = woche - 1
-    else:
-        jahr = datetime.date.today().isocalendar()[0]
-        woche = datetime.date.today().isocalendar()[1]
-    if woche == current_week and jahr == current_year:
-        is_week = True
-    if woche != current_week or jahr != current_year:
-        is_week = False
-        """
     current_week = datetime.date.today().isocalendar()[1]
     current_year = datetime.date.today().isocalendar()[0]
     is_week = None
@@ -152,16 +126,13 @@ def reservierung_form(request):
                 for reservierung in reservierungen:
                     print(reservierung)
                     if reservierung.taeglich:
-                        print("reservierung täglich true")
                         # liegt form.anfangsDatum in einer bereits bestehenden
                         # reservierung
                         if reservierung.anfangsDatum < form.cleaned_data.get("anfangsDatum") and form.cleaned_data.get("anfangsDatum") < reservierung.endDatum:
                             # ist die reservierung täglich
-                            print("liegt in reservierung")
                             if form.cleaned_data.get("taeglich"):
                                 # liegt die r.endZeit vor f.anfangsZeit oder
                                 # r.anfangsZeit nach f.endZeit
-                                print("form täglich")
                                 if reservierung.endZeit <= form.cleaned_data.get("anfangsZeit") or reservierung.anfangsZeit >= form.cleaned_data.get("endZeit"):
                                     # trifft zu also reservierung möglich
                                     moeglich = True
@@ -177,13 +148,11 @@ def reservierung_form(request):
                                 else:
                                     # reservierung ganztägig
                                     # nicht möglich
-                                    print("nicht möglich")
                                     moeglich = False
                                     reserv = reservierung
                                     break
                         else:
                             # liegt f.anfangsDatum nach r.endDatum
-                            print("else block")
                             if reservierung.endDatum < form.cleaned_data.get("anfangsDatum"):
                                 moeglich = True
                             # liegen r.endDatum und f.anfangsDatum auf den
@@ -219,7 +188,6 @@ def reservierung_form(request):
                             # fehlermeldung anzeigen
                             # verfügbare räume anzeigen
                             # reservierung die belegt anzeigen
-                            print("Block 1")
                             moeglich = False
                             reserv = reservierung
                             break
@@ -228,7 +196,6 @@ def reservierung_form(request):
                             # der neuen
                             if reservierung.endDatum < form.cleaned_data.get("anfangsDatum"):
                                 moeglich = True
-                                print("Block 2")
                             # reservierungsende und beginn der neuen gleicher
                             # tag
                             elif reservierung.endDatum == form.cleaned_data.get("anfangsDatum"):
@@ -236,24 +203,19 @@ def reservierung_form(request):
                                 # neuen anfangszeit
                                 if reservierung.endZeit <= form.cleaned_data.get("anfangsZeit"):
                                     moeglich = True
-                                    print("Block 3")
                                 elif reservierung.anfangsZeit >= form.cleaned_data.get("endZeit"):
                                     moeglich = True
                                 else:
                                     moeglich = False
-                                    print("Block 4")
                                     reserv = reservierung
                                     break
                             elif reservierung.anfangsDatum > form.cleaned_data.get("endDatum"):
                                 moeglich = True
-                                print("Block 5")
                             elif reservierung.anfangsDatum == form.cleaned_data.get("endDatum"):
                                 if reservierung.anfangsZeit > form.cleaned_data.get("endZeit"):
                                     moeglich = True
-                                    print("Block 6")
                                 else:
                                     moeglich = False
-                                    print("Block 7")
                                     reserv = reservierung
                                     break
             else:
