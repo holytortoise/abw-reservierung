@@ -65,7 +65,7 @@ def schilder_detail(request,pk):
 
     if woche == current_week:
         is_week = True
-    else:
+    if woche != current_week:
         is_week = False
     reservierungen = []
     raum_frei = True
