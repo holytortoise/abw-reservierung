@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
+
 import datetime
 
 from reservierung import models
@@ -45,13 +46,15 @@ def schilder_detail(request,pk):
     if request.method == 'POST':
         jahr = int(request.POST['jahr'])
         woche = int(request.POST['woche'])
-
+        # Wurde der rechte Button für nächste Woche gedrückt wird woche um 1
+        # hochgezählt
         if request.POST.__contains__('next_week'):
             if woche == datetime.date(jahr, 12, 28).isocalendar()[1]:
                 woche = 1
                 jahr = jahr + 1
             else:
                 woche = woche + 1
+        # Wurde der linke Button gedrückt wird Woche heruntergezählt
         if request.POST.__contains__('last_week'):
             if woche == 1:
                 jahr = jahr -1
@@ -63,7 +66,7 @@ def schilder_detail(request,pk):
         jahr = datetime.date.today().isocalendar()[0]
         woche = datetime.date.today().isocalendar()[1]
     # Ergibt True wenn die aktuelle Woche gleich der auf dem Schild angezeigten ist
-    if woche == current_week:
+    if woche == current_week and jahr == current_year:
         is_week = True
     if woche != current_week:
         is_week = False
