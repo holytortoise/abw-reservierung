@@ -8,7 +8,7 @@ class SchilderLoginForm(forms.Form):
     password = forms.CharField(label="Passwort",widget=forms.PasswordInput)
 
     def clean(self):
-        cleaned_data = super(ReservierungForm, self).clean()
+        cleaned_data = super(SchilderLoginForm, self).clean()
         f_username = cleaned_data.get("username")
         f_password = cleaned_data.get("password")
 
