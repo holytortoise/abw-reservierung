@@ -62,7 +62,8 @@ def schilder_detail(request,pk):
     else:
         jahr = datetime.date.today().isocalendar()[0]
         woche = datetime.date.today().isocalendar()[1]
-    if woche == current_week:
+
+    if woche >= current_week:
         is_week = True
     else:
         is_week = False
