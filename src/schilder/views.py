@@ -81,6 +81,7 @@ def schilder_detail(request,pk):
     context_dict = {'raum':raum,'reservierungen':reservierungen,
     'raum_frei':raum_frei,'woche':woche,'jahr':jahr,'current_week':current_week,
     'current_year':current_year,'is_week':is_week}
+    print(context_dict)
     return render(request,'schilder/generic_room.html',context_dict)
 
 def schilder_login(request,room):
