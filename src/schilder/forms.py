@@ -12,7 +12,7 @@ class SchilderLoginForm(forms.Form):
         f_username = cleaned_data.get("username")
         f_password = cleaned_data.get("password")
 
-        if username and password:
+        if f_username and f_password:
             # Only do something if both fields are valid so far.
             if authenticate(username=f_username, password=f_password):
                 raise forms.ValidationError("Nutzername oder Passwort ist falsch")
