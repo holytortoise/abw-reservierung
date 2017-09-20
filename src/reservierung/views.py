@@ -121,8 +121,8 @@ def index(request):
             rooms_return.append(room_return)
     if len(rooms_return) == 0:
         rooms_return = None
-    context_dict = {'rooms_return':rooms_return,'reservierungen':reservierungen,
-    'raum_frei':raum_frei,'woche':woche,'jahr':jahr,'current_week':current_week,
+    context_dict = {'rooms_return':rooms_return,'reserv':reservierungen,
+    'woche':woche,'jahr':jahr,'current_week':current_week,
     'current_year':current_year,'is_week':is_week}
     return render(request, 'index.html', context_dict)
 
