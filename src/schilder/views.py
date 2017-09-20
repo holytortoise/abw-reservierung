@@ -328,7 +328,6 @@ def reservierung_form(request,pk):
                         free_rooms = models.Raum.objects.all()
         else:
             form = forms.ReservierungForm()
-        print(free_rooms)
         return render(request, 'schilder/reservierung_form.html', {'form':form,
         'reserv':reserv,'free_rooms':free_rooms,'current_room':current_room,})
     else:
