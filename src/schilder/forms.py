@@ -14,5 +14,5 @@ class SchilderLoginForm(forms.Form):
 
         if f_username and f_password:
             # Only do something if both fields are valid so far.
-            if authenticate(username=f_username, password=f_password):
+            if not authenticate(username=f_username, password=f_password):
                 raise forms.ValidationError("Nutzername oder Passwort ist falsch")
