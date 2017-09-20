@@ -58,13 +58,14 @@ def schilder_detail(request,pk):
                 woche = datetime.date(jahr,12,28).isocalendar()[1]
             else:
                 woche = woche - 1
-        if woche == current_week:
-            is_week = True
-        else:
-            is_week = False
+
     else:
         jahr = datetime.date.today().isocalendar()[0]
         woche = datetime.date.today().isocalendar()[1]
+    if woche == current_week:
+        is_week = True
+    else:
+        is_week = False
     reservierungen = []
     raum_frei = True
     raum = models.Raum.objects.get(id=pk)
