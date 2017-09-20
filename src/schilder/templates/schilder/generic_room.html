@@ -51,9 +51,7 @@
     <th>Grund</th>
     <th>Beginn</th>
     <th>Ende</th>
-    {% comment %}
-    <th>Details</th>
-    {% endcomment %}
+    <th>T</th>
   </thead>
 {% for reservierung  in reservierungen %}
     <tr>
@@ -63,9 +61,7 @@
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>
       <td><h4>{{reservierung.endDatum|date:"j.m.o"}} {% if reservierung.endZeit is None %}
         {% else %} {{reservierung.endZeit|time:"H:i"}} {% endif %}</h4></td>
-      {% comment %}
-      <td><h4><a href="{% url 'schilder:reserv-detail' pk=reservierung.id %}">Details</a></h4></h4></td>
-      {% endcomment %}
+      <td><h4>{% if reservierung.taeglich %}X{% endif %}</h4></td>
     </tr>
 {% endfor %}
 </table>
