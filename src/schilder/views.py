@@ -56,8 +56,8 @@ def schilder_detail(request,pk):
             if woche == 1:
                 jahr = jahr -1
                 woche = datetime.date(jahr,12,28).isocalendar()[1]
-        else:
-            woche = woche - 1
+            else:
+                woche = woche - 1
         if woche == current_week:
             is_week = True
         else:
