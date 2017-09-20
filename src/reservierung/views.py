@@ -49,6 +49,7 @@ def index(request):
     Woche. Und ermöglicht Durch die Wochen zu gehen
     """
     current_week = datetime.date.today().isocalendar()[1]
+    is_week = None
     if request.method == 'POST':
         jahr = int(request.POST['jahr'])
         woche = int(request.POST['woche'])
@@ -67,6 +68,10 @@ def index(request):
     else:
         jahr = datetime.date.today().isocalendar()[0]
         woche = datetime.date.today().isocalendar()[1]
+    if woche == current_week and jahr == current_year:
+        is_week = True
+    if woche != current_week or jahr != current_year:
+        is_week = False
     rooms = models.Raum.objects.all()
     rooms_return = []
     for room in rooms:
