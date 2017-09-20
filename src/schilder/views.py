@@ -68,7 +68,7 @@ def schilder_detail(request,pk):
     # Ergibt True wenn die aktuelle Woche gleich der auf dem Schild angezeigten ist
     if woche == current_week and jahr == current_year:
         is_week = True
-    if woche != current_week:
+    if woche != current_week or jahr != current_year:
         is_week = False
     reservierungen = []
     raum_frei = True
