@@ -17,7 +17,7 @@
     {% block head %}{% endblock head %}
   </head>
   <body>
-    <nav class="navbar navbar-inverse navbar-static-top">
+    <nav class="navbar navbar-inverse navbar-static-top navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -34,6 +34,7 @@
             <li>{% block reservierung %}{% endblock reservierung %}</li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            {% block nav-right %}{% endblock nav-right %}
             {% if user.is_authenticated %}
               <li class="navbar-text">{{user.username}}</li>
               <li>{% block logout %}<a href="{% url 'schilder:logout' room=1 %}"><span class="glyphicon glyphicon-user"></span> Logout</a>{% endblock logout %}</li>

@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.contrib.auth import authenticate,login,logout
+
 import datetime
 
 from reservierung import models
@@ -38,26 +39,37 @@ def schilder_detail(request,pk):
     Startseite der Türschilder, liefert die Reservierungen
     für die aktuelle Woche zurück
     """
+    # Aktuelle Woche und Jahr
     current_week = datetime.date.today().isocalendar()[1]
     current_year = datetime.date.today().isocalendar()[0]
+    is_week = None
     if request.method == 'POST':
         jahr = int(request.POST['jahr'])
         woche = int(request.POST['woche'])
+        # Wurde der rechte Button für nächste Woche gedrückt wird woche um 1
+        # hochgezählt
         if request.POST.__contains__('next_week'):
             if woche == datetime.date(jahr, 12, 28).isocalendar()[1]:
                 woche = 1
                 jahr = jahr + 1
             else:
                 woche = woche + 1
+        # Wurde der linke Button gedrückt wird Woche heruntergezählt
         if request.POST.__contains__('last_week'):
             if woche == 1:
                 jahr = jahr -1
                 woche = datetime.date(jahr,12,28).isocalendar()[1]
             else:
                 woche = woche - 1
+
     else:
         jahr = datetime.date.today().isocalendar()[0]
         woche = datetime.date.today().isocalendar()[1]
+    # Ergibt True wenn die aktuelle Woche gleich der auf dem Schild angezeigten ist
+    if woche == current_week and jahr == current_year:
+        is_week = True
+    if woche != current_week or jahr != current_year:
+        is_week = False
     reservierungen = []
     raum_frei = True
     raum = models.Raum.objects.get(id=pk)
@@ -71,9 +83,9 @@ def schilder_detail(request,pk):
                 raum_frei = False
     context_dict = {'raum':raum,'reservierungen':reservierungen,
     'raum_frei':raum_frei,'woche':woche,'jahr':jahr,'current_week':current_week,
-    'current_year':current_year}
+    'current_year':current_year,'is_week':is_week}
+    print(context_dict)
     return render(request,'schilder/generic_room.html',context_dict)
-
 
 def schilder_login(request,room):
     """
@@ -93,7 +105,6 @@ def schilder_login(request,room):
         form = s_forms.SchilderLoginForm()
     return render(request, 'schilder/login.html',{'form':form,'current_room':current_room})
 
-
 def schilder_logout(request,room):
     """
     Logout welcher zurück zum entsprechenden Schild leitet
@@ -101,8 +112,6 @@ def schilder_logout(request,room):
     print("logout")
     logout(request)
     return redirect('schilder:schilder-detail', pk=int(room))
-
-# View um Reservierungen zu erstellen
 
 def reservierung_form(request,pk):
     """
@@ -319,7 +328,6 @@ def reservierung_form(request,pk):
                         free_rooms = models.Raum.objects.all()
         else:
             form = forms.ReservierungForm()
-        print(free_rooms)
         return render(request, 'schilder/reservierung_form.html', {'form':form,
         'reserv':reserv,'free_rooms':free_rooms,'current_room':current_room,})
     else:

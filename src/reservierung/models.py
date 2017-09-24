@@ -51,4 +51,4 @@ class Reservierung(models.Model):
 
     class Meta:
         verbose_name_plural = 'Reservierungen'
-        ordering = ['reservierterRaum', 'anfangsDatum']
+        ordering = ['reservierterRaum', 'anfangsDatum','anfangsZeit']

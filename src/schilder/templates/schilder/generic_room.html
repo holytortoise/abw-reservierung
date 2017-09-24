@@ -11,51 +11,57 @@
   <link rel="stylesheet" href="{% static 'css/schilder.css' %}">
 {% endblock head %}
 {% block brand %}<a class="navbar-brand" href="{% url 'schilder:schilder-detail' pk=raum.id %}">
-                {{raum.name}}</a>{% endblock brand %}
+                {{raum.nummer}}.{{raum.name}}</a>{% endblock brand %}
 {% block reservierung %}<a href="{% url 'schilder:reservierung' pk=raum.id %}">
   Reservierung</a>{% endblock reservierung %}
 {% block user %}<a href="{% url 'schilder:user-reserv' pk=current_room.id %}">{{user.username}}</a>{% endblock user %}
 {% block logout %}<a href="{% url 'schilder:logout' room=raum.id %}"><span class="glyphicon glyphicon-user"></span> Logout</a>{% endblock logout %}
 {% block login %}<a href="{% url 'schilder:login' room=raum.id %}">Login</a>{% endblock login %}
+{% block nav-right %}
+  <li class="navbar-text">{% now "j N o" %}</li>
+  <li class="navbar-text"><span id="uhr"></span></li>
+{% endblock nav-right %}
 {% block content %}
 
 <div class="wrapper">
   <h1 class="raum-name">{{raum.nummer}}.{{raum.name}}</h1>
+  {% comment %}
   <h2 class="datum"><span>{% now "j N o" %}</span></h2><h2 class="zeit"><span id="uhr"></span></h2>
-
+  {% endcomment %}
   <br>
 <form class="form" method="post">
   {% csrf_token %}
-  <h2 class="kw">KW {{ woche }} {{ jahr }}</h2>
+  <h3 class="kw">KW {{ woche }} {{ jahr }}</h3>
   <input id="woche" type="hidden" name="woche" value="{{woche}}">
   <input id="jahr" type="hidden" name="jahr" value="{{jahr}}">
   <input id='current_week' type="hidden" name="current_week" value="{{current_week}}">
   <input id='current_year' type="hidden" name="current_year" value="{{current_year}}">
+  {% if is_week %}
+  {% else %}
   <button class="last btn btn-primary" type="submit" name="last_week"><span class="glyphicon glyphicon-arrow-left"></span></button>
+  {% endif %}
   <button class="next btn btn-primary" type="submit" name="next_week"><span class="glyphicon glyphicon-arrow-right"></span></button>
 </form>
-<h2 class="frei {% if raum_frei %} raum-frei {% else %} raum-besetzt{% endif %}">{% if raum_frei %}
-    Frei {% else %}
-    Besetzt
-{% endif %}
-</h2>
+
 </div>
 <br>
 <table class="table table-bordered">
   <thead>
     <th>Von</th>
+    <th>Grund</th>
     <th>Beginn</th>
     <th>Ende</th>
-    <th>Details</th>
+    <th>T</th>
   </thead>
 {% for reservierung  in reservierungen %}
     <tr>
       <td><h4>{{reservierung.reserviert_von}}</h4></td>
-      <td><h4>{{reservierung.anfangsDatum|date:"j N o"}} {% if reservierung.anfangsZeit is None %}
+      <td><h4>{{reservierung.reservierungsGrund}}</h4></td>
+      <td><h4>{{reservierung.anfangsDatum|date:"j.m.o"}} {% if reservierung.anfangsZeit is None %}
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>
-      <td><h4>{{reservierung.endDatum|date:"j N o"}} {% if reservierung.endZeit is None %}
+      <td><h4>{{reservierung.endDatum|date:"j.m.o"}} {% if reservierung.endZeit is None %}
         {% else %} {{reservierung.endZeit|time:"H:i"}} {% endif %}</h4></td>
-      <td><h4><a href="{% url 'schilder:reserv-detail' pk=reservierung.id %}">Details</a></h4></h4></td>
+      <td><h4>{% if reservierung.taeglich %}X{% endif %}</h4></td>
     </tr>
 {% endfor %}
 </table>
@@ -84,7 +90,7 @@
     m = checkTime(m);
     s = checkTime(s);
     document.getElementById('uhr').innerHTML =
-    h + ":" + m + ":" + s;
+    h + ":" + m;
     var t = setTimeout(startTime, 500);
   }
   function checkTime(i){

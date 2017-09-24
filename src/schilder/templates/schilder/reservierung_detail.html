@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends "schilder/base.html" %}
 {% block titel %}Reservierungsdetails{% endblock titel %}
-{% block brand %}<a class="navbar-brand" href="/schilder/{{reservierung.reservierterRaum.id}}">{{reservierung.reservierterRaum.name}}</a>{% endblock brand %}
+{% block brand %}<a class="navbar-brand" href="/schilder/{{reservierung.reservierterRaum.id}}">{{reservierung.reservierterRaum.nummer}}.{{reservierung.reservierterRaum.name}}</a>{% endblock brand %}
 {% block logout %}<a href="{% url 'schilder:logout' room=reservierung.reservierterRaum.id %}"><span class="glyphicon glyphicon-user"></span> Logout</a>{% endblock logout %}
 {% block content %}
 
