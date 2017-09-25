@@ -1,12 +1,16 @@
 from django.conf.urls import url
 from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 from . import views
 
-favicon_view = RedirectView.as_view(url='static/images/favicon.ico', permanent=true)
 
 app_name = 'reservierung'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^favicon.ico$',
+    RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'),
+    permanent=False),
+    name="favicon"),
     url(r'^favicon\.ico$', favicon_view)
     url(r'reservierung/form/$', views.reservierung_form, name='form'),
     url(r'reservierung/update/(?P<pk>[0-9]+)/$',
