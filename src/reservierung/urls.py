@@ -1,9 +1,13 @@
 from django.conf.urls import url
+from django.views.generic.base import RedirectView
 from . import views
+
+favicon_view = RedirectView.as_view(url='static/images/favicon.ico', permanent=true)
 
 app_name = 'reservierung'
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^favicon\.ico$', favicon_view)
     url(r'reservierung/form/$', views.reservierung_form, name='form'),
     url(r'reservierung/update/(?P<pk>[0-9]+)/$',
         views.ReservierungUpdate.as_view(), name='reservierung-update'),
