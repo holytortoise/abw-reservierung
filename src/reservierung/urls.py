@@ -11,7 +11,6 @@ urlpatterns = [
     RedirectView.as_view(url=staticfiles_storage.url('favicon.ico'),
     permanent=False),
     name="favicon"),
-    url(r'^favicon\.ico$', favicon_view)
     url(r'reservierung/form/$', views.reservierung_form, name='form'),
     url(r'reservierung/update/(?P<pk>[0-9]+)/$',
         views.ReservierungUpdate.as_view(), name='reservierung-update'),
