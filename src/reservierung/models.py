@@ -31,7 +31,7 @@ class Reservierung(models.Model):
     endDatum = models.DateField("End Datum", default=datetime.date.today)
     anfangsZeit = models.TimeField("Reserviert von")
     endZeit = models.TimeField("Reserviert bis")
-    taeglich = models.BooleanField("Taeglich", default=False)
+    täglich = models.BooleanField("Taeglich", default=False)
 
     def get_absolute_url(self):
         return reverse('reservierung:index')
