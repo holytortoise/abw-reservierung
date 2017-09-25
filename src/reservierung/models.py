@@ -11,7 +11,7 @@ import datetime
 
 class Raum(models.Model):
     name = models.CharField(max_length=255)
-    nummer = models.IntegerField()
+    nummer = models.CharField(max_length=255)
 
     def get_name(self):
         return "{}.{}".format(self.nummer, self.name)
