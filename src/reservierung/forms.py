@@ -12,8 +12,8 @@ class ReservierungForm(forms.Form):
     reservierungsGrund = forms.CharField(max_length=255)
     anfangsDatum = forms.DateField()
     endDatum = forms.DateField()
-    anfangsZeit = forms.TimeField()
-    endZeit = forms.TimeField()
+    anfangsZeit = forms.TimeField(initial='HH:MM')
+    endZeit = forms.TimeField(initial='HH:MM')
     taeglich = forms.BooleanField(required=False)
 
     def clean(self):
