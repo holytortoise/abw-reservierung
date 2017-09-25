@@ -14,7 +14,7 @@ class ReservierungForm(forms.Form):
     endDatum = forms.DateField()
     anfangsZeit = forms.TimeField(help_text='HH:mm')
     endZeit = forms.TimeField(help_text='HH:mm')
-    taeglich = forms.BooleanField(required=False)
+    täglich = forms.BooleanField(required=False)
 
     def clean(self):
         cleaned_data = super(ReservierungForm, self).clean()
