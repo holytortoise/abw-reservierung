@@ -9,7 +9,7 @@ class ReservierungForm(forms.Form):
     model = Reservierung()
     choice = model.create_choice()
     reservierterRaum = forms.ChoiceField(choice)
-    reservierungsGrund = forms.CharField(max_length=255)
+    reservierungsGrund = forms.CharField(max_length=40)
     anfangsDatum = forms.DateField()
     endDatum = forms.DateField()
     anfangsZeit = forms.TimeField(help_text='HH:mm')
