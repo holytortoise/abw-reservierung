@@ -29,7 +29,7 @@
     <input type="submit" class="btn btn-primary" name="reservieren" value="Reservieren">
   </form>
   {% if reserv is not None %}
-    <h2>Es existiert bereits eine Reservierung</h2>
+    <h3>Es existiert bereits eine Reservierung</h3>
     <table class="tabke table-bordered">
       <thead>
         <th>Reservnr.</th>
@@ -40,11 +40,11 @@
       </thead>
       <tbody>
         <tr>
-          <td id="td_nr"><h3>{{ reserv.id }}</h3></td>
-          <td id="td_user"><h3>{{ reserv.reserviert_von }}</h3></td>
-          <td id="td_anfang"><h3>{{ reserv.anfangsDatum }} {{reserv.anfangsZeit}}</h3></td>
-          <td id="td_ende"><h3>{{ reserv.endDatum}} {{ reserv.endZeit}}</h3></td>
-          <td id="td_details"><h3><a href="{% url 'reservierung:reservierung-detail' pk=reserv.id %}"><span class="glyphicon glyphicon-info-sign"></span> Details</a></h3></td>
+          <td id="td_nr">{{ reserv.id }}</td>
+          <td id="td_user">{{ reserv.reserviert_von }}</td>
+          <td id="td_anfang">{{ reserv.anfangsDatum }} {{reserv.anfangsZeit}}</td>
+          <td id="td_ende">{{ reserv.endDatum}} {{ reserv.endZeit}}</td>
+          <td id="td_details"><a href="{% url 'reservierung:reservierung-detail' pk=reserv.id %}"><span class="glyphicon glyphicon-info-sign"></span> Details</a></td>
         </tr>
       </tbody>
     </table>
