@@ -72,3 +72,8 @@ table {
   -o-hyphens: auto;
   hyphens: auto;
 }
+
+.tabelle {
+  grid-column-start: 1;
+  grid-column-end: 5;
+}
