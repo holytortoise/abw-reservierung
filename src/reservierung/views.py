@@ -222,7 +222,7 @@ def reservierung_form(request):
                 moeglich = True
             if moeglich:
                 reserv = models.Reservierung()
-                reserv.reserviert_von = request.user.last_name
+                reserv.reserviert_von = request.user
                 reserv.reservierterRaum = models.Raum.objects.get(
                     id=form.cleaned_data.get("reservierterRaum"))
                 reserv.reservierungsGrund = form.cleaned_data.get(
