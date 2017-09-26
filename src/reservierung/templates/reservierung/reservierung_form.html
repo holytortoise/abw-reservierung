@@ -16,13 +16,11 @@
       $("#id_endDatum").datepicker({dateFormat: 'yy-mm-dd'});
     });
   </script>
-
-
-
 {% endblock head %}
 {% block content %}
-
-  <h1>Reservierung</h1>
+  <div class="wrapper">
+  <h1 class="top">Reservierung</h1>
+</div>
   <form method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
