@@ -57,7 +57,7 @@
     <tr>
       <td><h4>{{reservierung.reserviert_von.last_name}}</h4></td>
       <td><h4>{{reservierung.reservierungsGrund}}</h4></td>
-      <td><h4>{{reservierung.anfangsDatum|date:"d.h.o"}} {% if reservierung.anfangsZeit is None %}
+      <td><h4>{{reservierung.anfangsDatum|date:"d.m.o"}} {% if reservierung.anfangsZeit is None %}
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>
       <td><h4>{{reservierung.endDatum|date:"d.m.o"}} {% if reservierung.endZeit is None %}
         {% else %} {{reservierung.endZeit|time:"H:i"}} {% endif %}</h4></td>
