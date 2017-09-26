@@ -32,7 +32,7 @@
     <td id="r_grund">{{ reserv.reservierungsGrund }}</td>
     <td id="r_anfang">{{ reserv.anfangsDatum|date:"j N o"}} {{ reserv.anfangsZeit|date:"G" }}:{{reserv.anfangsZeit|date:"i" }}</td>
     <td id="r_ende">{{ reserv.endDatum|date:"j N o" }} {{ reserv.endZeit|date:"G" }}:{{ reserv.endZeit|date:"i" }}</td>
-    {% if reserv.taeglich %}
+    {% if reserv.täglich %}
         <td>Ja</td>
         {% else %}
         <td>Nein</td>

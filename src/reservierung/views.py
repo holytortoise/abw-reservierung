@@ -125,12 +125,12 @@ def reservierung_form(request):
             if reservierungen.exists():
                 for reservierung in reservierungen:
                     print(reservierung)
-                    if reservierung.taeglich:
+                    if reservierung.täglich:
                         # liegt form.anfangsDatum in einer bereits bestehenden
                         # reservierung
                         if reservierung.anfangsDatum < form.cleaned_data.get("anfangsDatum") and form.cleaned_data.get("anfangsDatum") < reservierung.endDatum:
                             # ist die reservierung täglich
-                            if form.cleaned_data.get("taeglich"):
+                            if form.cleaned_data.get("täglich"):
                                 # liegt die r.endZeit vor f.anfangsZeit oder
                                 # r.anfangsZeit nach f.endZeit
                                 if reservierung.endZeit <= form.cleaned_data.get("anfangsZeit") or reservierung.anfangsZeit >= form.cleaned_data.get("endZeit"):
@@ -231,7 +231,7 @@ def reservierung_form(request):
                 reserv.endDatum = form.cleaned_data.get("endDatum")
                 reserv.anfangsZeit = form.cleaned_data.get("anfangsZeit")
                 reserv.endZeit = form.cleaned_data.get("endZeit")
-                reserv.taeglich = form.cleaned_data.get("taeglich")
+                reserv.täglich = form.cleaned_data.get("täglich")
                 reserv.save()
                 return HttpResponseRedirect(reverse('reservierung:index'))
             else:
@@ -250,9 +250,9 @@ def reservierung_form(request):
                             for room_reserv in room_reservs:
                                 # liegt die reservierung in dem zeitraum einer
                                 # bestehenden Reservierung
-                                if form.cleaned_data.get("taeglich"):
+                                if form.cleaned_data.get("täglich"):
                                     if room_reserv.anfangsDatum < form.cleaned_data.get("anfangsDatum") and form.cleaned_data.get("anfangsDatum") < room_reserv.endDatum:
-                                        if room_reserv.taeglich:
+                                        if room_reserv.täglich:
                                             if room_reserv.endZeit <= form.cleaned_data.get("anfangsZeit") or room_reserv.anfangsZeit > form.cleaned_data.get("endZeit"):
                                                 free_room = True
                                             else:

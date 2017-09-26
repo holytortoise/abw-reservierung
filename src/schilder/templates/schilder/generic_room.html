@@ -61,7 +61,7 @@
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>
       <td><h4>{{reservierung.endDatum|date:"j.m.o"}} {% if reservierung.endZeit is None %}
         {% else %} {{reservierung.endZeit|time:"H:i"}} {% endif %}</h4></td>
-      <td><h4>{% if reservierung.taeglich %}X{% endif %}</h4></td>
+      <td><h4>{% if reservierung.täglich %}X{% endif %}</h4></td>
     </tr>
 {% endfor %}
 </table>
