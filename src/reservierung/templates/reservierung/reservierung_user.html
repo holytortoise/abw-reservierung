@@ -8,6 +8,7 @@
 {% block content %}
 <div class="wrapper">
 <h1 class="last">{{user.username}}</h1>
+<h3><a href="{% url 'account:password-change' %}">Passwort ändern</a></h3>
 </div>
 
 {% for room in rooms_return  %}
@@ -46,7 +47,4 @@
   {% endif %}
   {% endfor %}
 {% endfor %}
-<div class="wrapper">
-  <h2><a href="{% url 'account:password-change' %}">Password ändern</a></h2>
-</div>
 {% endblock content %}
