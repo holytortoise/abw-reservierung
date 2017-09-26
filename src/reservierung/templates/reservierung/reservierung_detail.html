@@ -5,7 +5,7 @@
 {% block content %}
 
   <h2>Reservierter Raum: {{reservierung.reservierterRaum}}</h2>
-  <h3>Reserviert von: {{reservierung.reserviert_von}}</h3>
+  <h3>Reserviert von: {{reservierung.reserviert_von.last_name}}</h3>
   <h3>Reservierungs Grund: {{reservierung.reservierungsGrund}}</h3>
   <h3>Von {{reservierung.anfangsDatum|date:"j N o"}} {{reservierung.anfangsZeit|time:"H:i"}} bis
   {{reservierung.endDatum|date:"j N o"}} {{reservierung.endZeit|time:"H:i"}}</h3>
