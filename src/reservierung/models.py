@@ -47,7 +47,9 @@ class Reservierung(models.Model):
         return choice
 
     def __str__(self):
-        return "{} reserviert von {} für {}".format(self.reservierterRaum,self.reserviert_von.last_name,self.reservierungsGrund)
+        return "{} {} {} {} {} {} {}".format(self.reserviert_von.last_name,
+    self.reservierterRaum,self.reservierungsGrund,self.anfangsDatum,
+    self.anfangsZeit,self.endDatum,self.endZeit)
 
     class Meta:
         verbose_name_plural = 'Reservierungen'
