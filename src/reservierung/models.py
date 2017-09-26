@@ -26,7 +26,7 @@ class Raum(models.Model):
 class Reservierung(models.Model):
     reserviert_von = models.ForeignKey(User, related_name="Reserved")
     reservierterRaum = models.ForeignKey(Raum)
-    reservierungsGrund = models.TextField(default="Unterricht")
+    reservierungsGrund = models.CharField(max_length=40)
     anfangsDatum = models.DateField("Start Datum", default=datetime.date.today)
     endDatum = models.DateField("End Datum", default=datetime.date.today)
     anfangsZeit = models.TimeField("Reserviert von")
