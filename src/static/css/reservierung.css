@@ -65,6 +65,6 @@ table {
   grid-template-columns: repeat(4, 1fr);
 }
 
-#r_grund {
+.r_grund {
   hyphens: auto;
 }
