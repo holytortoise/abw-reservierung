@@ -66,5 +66,9 @@ table {
 }
 
 .r_grund {
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -o-hyphens: auto;
   hyphens: auto;
 }
