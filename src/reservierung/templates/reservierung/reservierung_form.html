@@ -30,8 +30,8 @@
   </form>
   {% if reserv is not None %}
   <div class="wrapper">
-    <h3>Es existiert bereits eine Reservierung</h3>
-    <table class="tabke table-bordered">
+    <h3 class="top">Es existiert bereits eine Reservierung</h3>
+    <table class="table table-bordered tabelle">
       <thead>
         <th>Reservnr.</th>
         <th>Von</th>
@@ -49,13 +49,15 @@
         </tr>
       </tbody>
     </table>
+  </div>
   {% endif %}
   {% if free_rooms is None %}
   {% else %}
   {% for room in free_rooms  %}
       {% if forloop.first %}
-      <h3>Folgende Räume sind Frei</h3>
-      <table class="table table-bordered">
+      <div class="wrapper">
+      <h3 class="top">Folgende Räume sind Frei</h3>
+      <table class="table table-bordered tabelle">
         <thead>
           <th>Raum Nummer</th>
           <th>Raum</th>
@@ -70,9 +72,10 @@
       {% if forloop.last %}
       </tbody>
     </table>
+      </div>
       {% endif %}
       {% empty %}
-    </div>
+
         <h3>Keine Freien Räume für diesen Zeitraum</h3>
   {% endfor %}
   {% endif %}
