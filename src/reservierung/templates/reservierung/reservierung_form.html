@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="{% static 'jquery/jquery-ui-1.12.1.custom/jquery-ui.css' %}">
   <link rel="stylesheet" href="{% static 'jquery/jquery-ui-1.12.1.custom/jquery-ui.theme.css' %}">
   <link rel="stylesheet" href="{% static 'jquery/jquery-ui-1.12.1.custom/jquery-ui.structure.css' %}">
-
+  <link rel="stylesheet" href="{% static 'css/reservierung.css' %}">
   <script>
     $(function(){
       $("#id_anfangsDatum").datepicker({dateFormat:'yy-mm-dd'});
@@ -29,6 +29,7 @@
     <input type="submit" class="btn btn-primary" name="reservieren" value="Reservieren">
   </form>
   {% if reserv is not None %}
+  <div class="wrapper">
     <h3>Es existiert bereits eine Reservierung</h3>
     <table class="tabke table-bordered">
       <thead>
@@ -71,6 +72,7 @@
     </table>
       {% endif %}
       {% empty %}
+    </div>
         <h3>Keine Freien Räume für diesen Zeitraum</h3>
   {% endfor %}
   {% endif %}

@@ -13,7 +13,7 @@
   <!-- Virtual Keyboard Imports -->
   <link rel="stylesheet" href="{% static 'virtual_keyboard/Keyboard-master/css/keyboard.css' %}">
   <script src="{% static 'virtual_keyboard/Keyboard-master/js/jquery.keyboard.js' %}"></script>
-
+  <link rel="stylesheet" href="{% static 'css/reservierung.css' %}">
 
   <script>
     $(function(){
@@ -33,6 +33,7 @@
     <input type="submit" class="btn btn-primary" name="reservieren" value="Reservieren">
   </form>
   {% if reserv is not None %}
+  <div class="wrapper">
     <h2>Es existiert bereits eine Reservierung</h2>
     <table class="tabke table-bordered">
       <thead>
@@ -45,7 +46,7 @@
       <tbody>
         <tr>
           <td id="td_nr"><h3>{{ reserv.id }}</h3></td>
-          <td id="td_user"><h3>{{ reserv.reserviert_von }}</h3></td>
+          <td id="td_user"><h3>{{ reserv.reserviert_von.last_name }}</h3></td>
           <td id="td_anfang"><h3>{{ reserv.anfangsDatum }} {{reserv.anfangsZeit}}</h3></td>
           <td id="td_ende"><h3>{{ reserv.endDatum}} {{ reserv.endZeit}}</h3></td>
           <td id="td_details"><h3><a href="{% url 'reservierung:reservierung-detail' pk=reserv.id %}">
@@ -79,7 +80,7 @@
         <h3>Keine Freien Räume für diesen Zeitraum</h3>
   {% endfor %}
   {% endif %}
-
+</div>
 
 <script>
   $('#id_reservierungsGrund').keyboard();
