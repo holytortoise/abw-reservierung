@@ -57,15 +57,13 @@
       <h3 class="top">Folgende Räume sind Frei</h3>
       <table class="table table-bordered tabelle">
         <thead>
-          <th>Raum Nummer</th>
           <th>Raum</th>
         </thead>
         <tbody>
 
       {% endif %}
       <tr>
-        <td>{{ room.nummer }}</td>
-        <td>{{ room.name }}</td>
+        <td>{{ room.nummer }}{{ room.name }}</td>
       </tr>
       {% if forloop.last %}
       </tbody>
@@ -73,7 +71,6 @@
       </div>
       {% endif %}
       {% empty %}
-
         <h3>Keine Freien Räume für diesen Zeitraum</h3>
   {% endfor %}
   {% endif %}
