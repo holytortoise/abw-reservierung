@@ -131,7 +131,6 @@ def reservierung_form(request):
                 reservierterRaum=form.cleaned_data.get("reservierterRaum"))
             if reservierungen.exists():
                 for reservierung in reservierungen:
-                    print(reservierung)
                     if reservierung.täglich:
                         # liegt form.anfangsDatum in einer bereits bestehenden
                         # reservierung
@@ -327,7 +326,6 @@ def reservierung_form(request):
                     free_rooms = models.Raum.objects.all()
     else:
         form = forms.ReservierungForm()
-    print(free_rooms)
     return render(request, 'reservierung/reservierung_form.html', {'form': form, 'reserv': reserv, 'free_rooms': free_rooms, })
 
 # View zum anzeigen aller Reservierungen des angemeldeten nutzers

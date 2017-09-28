@@ -21,57 +21,58 @@
   <div class="wrapper">
   <h1 class="top">Reservierung</h1>
 </div>
+{% if reserv is not None %}
+<div class="wrapper">
+  <h3 class="top">Es existiert bereits eine Reservierung</h3>
+  <table class="table table-bordered tabelle">
+    <thead>
+      <th>Reservnr.</th>
+      <th>Von</th>
+      <th>Beginn</th>
+      <th>Ende</th>
+      <th>Details</th>
+    </thead>
+    <tbody>
+      <tr>
+        <td id="td_nr">{{ reserv.id }}</td>
+        <td id="td_user">{{ reserv.reserviert_von }}</td>
+        <td id="td_anfang">{{ reserv.anfangsDatum }} {{reserv.anfangsZeit}}</td>
+        <td id="td_ende">{{ reserv.endDatum}} {{ reserv.endZeit}}</td>
+        <td id="td_details"><a href="{% url 'reservierung:reservierung-detail' pk=reserv.id %}"><span class="glyphicon glyphicon-info-sign"></span> Details</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+{% endif %}
+{% if free_rooms is None %}
+{% else %}
+{% for room in free_rooms  %}
+    {% if forloop.first %}
+    <div class="wrapper">
+    <h3 class="top">Folgende Räume sind Frei</h3>
+    <table class="table table-bordered tabelle">
+      <thead>
+        <th>Raum</th>
+      </thead>
+      <tbody>
+
+    {% endif %}
+    <tr>
+      <td>{{ room.nummer }}.{{ room.name }}</td>
+    </tr>
+    {% if forloop.last %}
+    </tbody>
+  </table>
+    </div>
+    {% endif %}
+    {% empty %}
+      <h3>Keine Freien Räume für diesen Zeitraum</h3>
+{% endfor %}
+{% endif %}
   <form method="post">
     {% csrf_token %}
     {% bootstrap_form form %}
     <input type="submit" class="btn btn-primary" name="reservieren" value="Reservieren">
   </form>
-  {% if reserv is not None %}
-  <div class="wrapper">
-    <h3 class="top">Es existiert bereits eine Reservierung</h3>
-    <table class="table table-bordered tabelle">
-      <thead>
-        <th>Reservnr.</th>
-        <th>Von</th>
-        <th>Beginn</th>
-        <th>Ende</th>
-        <th>Details</th>
-      </thead>
-      <tbody>
-        <tr>
-          <td id="td_nr">{{ reserv.id }}</td>
-          <td id="td_user">{{ reserv.reserviert_von }}</td>
-          <td id="td_anfang">{{ reserv.anfangsDatum }} {{reserv.anfangsZeit}}</td>
-          <td id="td_ende">{{ reserv.endDatum}} {{ reserv.endZeit}}</td>
-          <td id="td_details"><a href="{% url 'reservierung:reservierung-detail' pk=reserv.id %}"><span class="glyphicon glyphicon-info-sign"></span> Details</a></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  {% endif %}
-  {% if free_rooms is None %}
-  {% else %}
-  {% for room in free_rooms  %}
-      {% if forloop.first %}
-      <div class="wrapper">
-      <h3 class="top">Folgende Räume sind Frei</h3>
-      <table class="table table-bordered tabelle">
-        <thead>
-          <th>Raum</th>
-        </thead>
-        <tbody>
 
-      {% endif %}
-      <tr>
-        <td>{{ room.nummer }}.{{ room.name }}</td>
-      </tr>
-      {% if forloop.last %}
-      </tbody>
-    </table>
-      </div>
-      {% endif %}
-      {% empty %}
-        <h3>Keine Freien Räume für diesen Zeitraum</h3>
-  {% endfor %}
-  {% endif %}
 {% endblock content %}
