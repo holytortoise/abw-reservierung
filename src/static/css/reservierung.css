@@ -26,11 +26,12 @@ table {
 
 .last {
   grid-column-start: 2;
-  grid-column-end: 3;
+  grid-column-end: 2;
   grid-row-start: 1;
   grid-row-end: 1;
-  justify-self: center;
-  margin: auto;
+  justify-self: end;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 .next {
