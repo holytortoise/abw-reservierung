@@ -11,7 +11,7 @@ def alte_reservierungen():
     """
     Automatisches entfernen der alten Reservierungen
     """
-    os.system('source ../django-server/bin/activate && python src/manage.py alte_reservierungen && deactivate')
+    os.system("/bin/bash -c 'source ../django-server/bin/activate && python src/manage.py alte_reservierungen && deactivate'")
 
 scheduler = BlockingScheduler()
 scheduler.add_job(update, 'cron', day_of_week='sun', hour=12)
