@@ -79,6 +79,12 @@ def index(request):
     if woche != current_week or jahr != current_year:
         is_week = False
 
+    # Erzeuge daten für die Aktuelle Woche
+    datum = str(current_year)+'-W'+str(current_week)
+    r = datetime.datetime.strptime(datum + '-0', "%Y-W%W-%w")
+    start = r - timedelta(days=r.weekday())
+    end = start + timedelta(days=6)
+
     rooms = models.Raum.objects.all()
     rooms_return = []
     for room in rooms:
@@ -97,7 +103,7 @@ def index(request):
         rooms_return = None
     context_dict = {'rooms_return':rooms_return,'reserv':reservierungen,
     'woche':woche,'jahr':jahr,'current_week':current_week,
-    'current_year':current_year,'is_week':is_week}
+    'current_year':current_year,'is_week':is_week,'start':start,'end':end}
     return render(request, 'index.html', context_dict)
 
 # View um Reservierungen zu erstellen

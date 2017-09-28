@@ -78,6 +78,11 @@ table {
   grid-column-end: 5;
 }
 
+.tablle-frei {
+  grid-column-start: 2;
+  grid-column-end: 4;
+}
+
 #password_change {
   grid-column-start: 4;
   grid-column-end: 5;
