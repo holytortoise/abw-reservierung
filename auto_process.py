@@ -1,11 +1,15 @@
 import os
 from apscheduler.schedulers.blocking import BlockingScheduler
+from decouple import config
+
+sudoPassword = config('SUDOPASSWORD')
 
 def update():
     """
     Automatisches Update des Reservierungssystems über Github
     """
-    os.system('sudo supervisorctl stop abwreservierung && cd /home/webserver/abwreservierung && git pull && sudo supervisorctl start abwreservierung && sudo chmod +x startup')
+    command = 'sudo supervisorctl stop abwreservierung && cd /home/webserver/abwreservierung && git pull && sudo supervisorctl start abwreservierung && sudo chmod +x startup'
+    os.system('echo %s|sudo -S %s' % (sudoPassword, command))
 
 def alte_reservierungen():
     """
