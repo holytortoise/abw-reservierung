@@ -82,8 +82,8 @@ def index(request):
     # Erzeuge daten für die Aktuelle Woche
     datum = str(current_year)+'-W'+str(current_week)
     r = datetime.datetime.strptime(datum + '-0', "%Y-W%W-%w")
-    start = r - timedelta(days=r.weekday())
-    end = start + timedelta(days=6)
+    start = r - datetime.timedelta(days=r.weekday())
+    end = start + datetime.timedelta(days=6)
 
     rooms = models.Raum.objects.all()
     rooms_return = []
