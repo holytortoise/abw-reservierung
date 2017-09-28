@@ -38,8 +38,8 @@ table {
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 1;
-  justify-self: center;
-  margin: auto;
+  /*justify-self: center;
+  margin: auto;*/
 }
 .top-right {
   grid-column-start: 3;
