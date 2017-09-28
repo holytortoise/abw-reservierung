@@ -66,6 +66,6 @@
   {% endfor %}
 {% endif %}
 
-<h1>{{ start }}</h1>
-<h1>{{ end }}</h1>
+<h1>{{ start|date:"d.m.o" }}</h1>
+<h1>{{ end|date:"d.m.o" }}</h1>
 {% endblock content %}
