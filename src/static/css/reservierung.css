@@ -38,7 +38,7 @@ table {
   grid-column-end: 4;
   grid-row-start: 1;
   grid-row-end: 1;
-  /*justify-self: center;*/
+  justify-self: start;
   margin: auto;
 }
 .top-right {
