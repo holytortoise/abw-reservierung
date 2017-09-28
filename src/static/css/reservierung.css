@@ -39,7 +39,8 @@ table {
   grid-row-start: 1;
   grid-row-end: 1;
   justify-self: start;
-  margin: auto;
+  margin-top: auto;
+  margin-bottom: auto;
 }
 .top-right {
   grid-column-start: 3;
