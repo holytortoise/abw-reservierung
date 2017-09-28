@@ -84,8 +84,8 @@ def index(request):
     r = datetime.datetime.strptime(datum + '-0', "%Y-W%W-%w")
     start = r - datetime.timedelta(days=r.weekday())
     end = start + datetime.timedelta(days=6)
-    print(start)
-    print(end)
+    start = start.strftime('%d.%m')
+    end = end.strftime('%d.%m')
     rooms = models.Raum.objects.all()
     rooms_return = []
     for room in rooms:
