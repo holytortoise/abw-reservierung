@@ -70,6 +70,15 @@ def schilder_detail(request,pk):
         is_week = True
     if woche != current_week or jahr != current_year:
         is_week = False
+
+    # Erzeuge daten für die Aktuelle Woche
+    datum = str(jahr)+'-W'+str(woche)
+    r = datetime.datetime.strptime(datum + '-0', "%Y-W%W-%w")
+    start = r - datetime.timedelta(days=r.weekday())
+    end = start + datetime.timedelta(days=6)
+    start = start.strftime('%d.%m')
+    end = end.strftime('%d.%m')
+
     reservierungen = []
     raum_frei = True
     raum = models.Raum.objects.get(id=pk)
@@ -83,7 +92,7 @@ def schilder_detail(request,pk):
                 raum_frei = False
     context_dict = {'raum':raum,'reservierungen':reservierungen,
     'raum_frei':raum_frei,'woche':woche,'jahr':jahr,'current_week':current_week,
-    'current_year':current_year,'is_week':is_week}
+    'current_year':current_year,'is_week':is_week,'start':start,'end':end}
     print(context_dict)
     return render(request,'schilder/generic_room.html',context_dict)
 

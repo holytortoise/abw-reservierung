@@ -16,9 +16,9 @@
   Reservierung</a>{% endblock reservierung %}
 {% block user %}<a href="{% url 'schilder:user-reserv' pk=current_room.id %}">{{user.username}}</a>{% endblock user %}
 {% block logout %}<a href="{% url 'schilder:logout' room=raum.id %}"><span class="glyphicon glyphicon-user"></span> Logout</a>{% endblock logout %}
-{% block login %}<a href="{% url 'schilder:login' room=raum.id %}">Login</a>{% endblock login %}
+{% block login %}<a href="{% url 'schilder:login' room=raum.id %}"><span class="glyphicon glyphicon-user"></span> Login</a>{% endblock login %}
 {% block nav-right %}
-  <li class="navbar-text">{% now "j N o" %}</li>
+  <li class="navbar-text">{% now "d.m.o" %}</li>
   <li class="navbar-text"><span id="uhr"></span></li>
 {% endblock nav-right %}
 {% block content %}
@@ -31,7 +31,7 @@
   <br>
 <form class="form" method="post">
   {% csrf_token %}
-  <h3 class="kw">KW {{ woche }} {{ jahr }}</h3>
+  <h3 class="kw">{{ start }} - {{ end }}.{{ jahr }}</h3>
   <input id="woche" type="hidden" name="woche" value="{{woche}}">
   <input id="jahr" type="hidden" name="jahr" value="{{jahr}}">
   <input id='current_week' type="hidden" name="current_week" value="{{current_week}}">
