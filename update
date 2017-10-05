@@ -1,4 +1,4 @@
 #!/bin/bash
 cd /home/webserver/abwreservierung
 source ../django-server/bin/activate
-python auto_process.py
+python update.py

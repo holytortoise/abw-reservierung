@@ -14,7 +14,7 @@ from . import models
 
 
 class ReservierungList(ListView):
-    model = models.Reservierung
+    queryset = models.Reservierung.objects.order_by('anfangsDatum','anfangsZeit')
     context_object_name = 'reservierungen'
 
 
@@ -86,7 +86,7 @@ def index(request):
     end = start + datetime.timedelta(days=6)
     start = start.strftime('%d.%m')
     end = end.strftime('%d.%m')
-    
+
     rooms = models.Raum.objects.all()
     rooms_return = []
     for room in rooms:
