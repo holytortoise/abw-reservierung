@@ -26,6 +26,7 @@ def update():
         os.system('echo %s|sudo -S %s' % (sudoPassword, command_chmod))
     except:
         pass
+
 def alte_reservierungen():
     """
     Automatisches entfernen der alten Reservierungen

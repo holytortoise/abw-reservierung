@@ -8,12 +8,12 @@ def update():
     Automatisches Update des Reservierungssystems über Github
     """
     try:
-        command_stop = 'sudo supervisorctl stop abwreservierung && sudo supervisorctl start abwreservierung && sudo chmod +x startup'
+        command_stop = 'sudo supervisorctl stop abwreservierung'
         os.system('echo %s|sudo -S %s' % (sudoPassword, command_stop))
     except:
         pass
     try:
-        os.system('cd /home/webserver/abwreservierung && git pull')
+        os.system('cd /home/webserver/abwreservierung &&git pull')
     except:
         pass
     try:
@@ -22,7 +22,7 @@ def update():
     except:
         pass
     try:
-        command_chmod = 'sudo chmod +x startup'
+        command_chmod = 'cd /home/webserver/abwreservierung/ && sudo chmod u+x update && sudo chmod u+x alte_reservierungen'
         os.system('echo %s|sudo -S %s' % (sudoPassword, command_chmod))
     except:
         pass
