@@ -22,7 +22,7 @@ def update():
     except:
         pass
     try:
-        command_chmod = 'sudo chmod u+x /home/webserver/abwreservierung/update && sudo chmod u+x /home/webserver/abwreservierung/updatealte_reservierungen'
+        command_chmod = 'sudo chmod u+x /home/webserver/abwreservierung/update && sudo chmod u+x /home/webserver/abwreservierung/alte_reservierungen'
         os.system('echo %s|sudo -S %s' % (sudoPassword, command_chmod))
     except:
         pass
