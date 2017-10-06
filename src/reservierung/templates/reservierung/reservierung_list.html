@@ -26,7 +26,7 @@
     {% endif %}
     <tr>
       <td>{{ reservierung.reservierterRaum }}</td>
-      <td>{{ reservierung.reserviert_von }}</td>
+      <td>{{ reservierung.reserviert_von.last_name }}</td>
       <td id="r_von">{{ reservierung.reserviert_für }}</td>
       <td class="r_grund">{{ reservierung.reservierungsGrund }}</td>
       <td id="r_anfang">{{ reservierung.anfangsDatum|date:"d.m.o"}} {{reservierung.anfangsZeit|date:"H:i" }}</td>
