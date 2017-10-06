@@ -22,7 +22,7 @@ class ReservierungUpdate(LoginRequiredMixin, UpdateView):
     login_url = 'account:login'
     redirect_field_name = 'redirect_to'
     model = models.Reservierung
-    fields = ['reservierterRaum', 'reservierungsGrund', 'anfangsDatum',
+    fields = ['reserviert_für','reservierterRaum', 'reservierungsGrund', 'anfangsDatum',
               'endDatum', 'anfangsZeit', 'endZeit']
 
 
