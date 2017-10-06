@@ -46,7 +46,7 @@
           <tbody>
     {% endif %}
     <tr>
-      <td id="r_von">{{ reserv.reserviert_von.last_name }}</td>
+      <td id="r_von">{{ reserv.reserviert_für }}</td>
       <td class="r_grund">{{ reserv.reservierungsGrund }}</td>
       <td id="r_anfang">{{ reserv.anfangsDatum|date:"d.m.o" }} {{ reserv.anfangsZeit|date:"H:i" }}</td>
       <td id="r_ende">{{ reserv.endDatum|date:"d.m.o" }} {{ reserv.endZeit|date:"H:i" }}</td>
