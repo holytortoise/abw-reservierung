@@ -11,7 +11,7 @@ import datetime
 
 class Raum(models.Model):
     name = models.CharField(max_length=255)
-    nummer = models.IntegerField()
+    nummer = models.CharField(max_length=255)
 
     def get_name(self):
         return "{}.{}".format(self.nummer, self.name)
@@ -26,12 +26,12 @@ class Raum(models.Model):
 class Reservierung(models.Model):
     reserviert_von = models.ForeignKey(User, related_name="Reserved")
     reservierterRaum = models.ForeignKey(Raum)
-    reservierungsGrund = models.TextField(default="Unterricht")
+    reservierungsGrund = models.CharField(max_length=40)
     anfangsDatum = models.DateField("Start Datum", default=datetime.date.today)
     endDatum = models.DateField("End Datum", default=datetime.date.today)
     anfangsZeit = models.TimeField("Reserviert von")
     endZeit = models.TimeField("Reserviert bis")
-    taeglich = models.BooleanField("Taeglich", default=False)
+    täglich = models.BooleanField("Täglich", default=False)
 
     def get_absolute_url(self):
         return reverse('reservierung:index')
@@ -47,7 +47,10 @@ class Reservierung(models.Model):
         return choice
 
     def __str__(self):
-        return "Reservnr: {}".format(self.id)
+        return "{} {} {} {} {} {} {}".format(self.reservierterRaum,
+    self.reserviert_von.last_name,
+    self.reservierungsGrund,self.anfangsDatum,
+    self.anfangsZeit,self.endDatum,self.endZeit)
 
     class Meta:
         verbose_name_plural = 'Reservierungen'

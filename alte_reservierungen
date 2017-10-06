@@ -1,0 +1,4 @@
+#!/bin/bash
+cd /home/webserver/abwreservierung
+source ../django-server/bin/activate
+python src/manage.py alte_reservierungen

@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
-<html>
+<html lang="de">
   <head>
     <meta charset="utf-8">
     <title>{% block titel %}{% endblock titel %}</title>
@@ -37,9 +37,9 @@
             {% block nav-right %}{% endblock nav-right %}
             {% if user.is_authenticated %}
               <li class="navbar-text">{{user.username}}</li>
-              <li>{% block logout %}<a href="{% url 'schilder:logout' room=1 %}"><span class="glyphicon glyphicon-user"></span> Logout</a>{% endblock logout %}</li>
+              <li>{% block logout %}{% endblock logout %}</li>
             {% else %}
-              <li>{% block login %}<a href="{% url 'schilder:login' room=1 %}"><span class="glyphicon glyphicon-user"></span> Login</a>{% endblock login %}</li>
+              <li>{% block login %}{% endblock login %}</li>
             {% endif %}
           </ul>
         </div>

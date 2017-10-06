@@ -14,7 +14,7 @@ from . import models
 
 
 class ReservierungList(ListView):
-    model = models.Reservierung
+    queryset = models.Reservierung.objects.order_by('anfangsDatum','anfangsZeit')
     context_object_name = 'reservierungen'
 
 
@@ -79,6 +79,14 @@ def index(request):
     if woche != current_week or jahr != current_year:
         is_week = False
 
+    # Erzeuge daten für die Aktuelle Woche
+    datum = str(jahr)+'-W'+str(woche)
+    r = datetime.datetime.strptime(datum + '-0', "%Y-W%W-%w")
+    start = r - datetime.timedelta(days=r.weekday())
+    end = start + datetime.timedelta(days=6)
+    start = start.strftime('%d.%m')
+    end = end.strftime('%d.%m')
+
     rooms = models.Raum.objects.all()
     rooms_return = []
     for room in rooms:
@@ -97,7 +105,7 @@ def index(request):
         rooms_return = None
     context_dict = {'rooms_return':rooms_return,'reserv':reservierungen,
     'woche':woche,'jahr':jahr,'current_week':current_week,
-    'current_year':current_year,'is_week':is_week}
+    'current_year':current_year,'is_week':is_week,'start':start,'end':end}
     return render(request, 'index.html', context_dict)
 
 # View um Reservierungen zu erstellen
@@ -124,13 +132,12 @@ def reservierung_form(request):
                 reservierterRaum=form.cleaned_data.get("reservierterRaum"))
             if reservierungen.exists():
                 for reservierung in reservierungen:
-                    print(reservierung)
-                    if reservierung.taeglich:
+                    if reservierung.täglich:
                         # liegt form.anfangsDatum in einer bereits bestehenden
                         # reservierung
                         if reservierung.anfangsDatum < form.cleaned_data.get("anfangsDatum") and form.cleaned_data.get("anfangsDatum") < reservierung.endDatum:
                             # ist die reservierung täglich
-                            if form.cleaned_data.get("taeglich"):
+                            if form.cleaned_data.get("täglich"):
                                 # liegt die r.endZeit vor f.anfangsZeit oder
                                 # r.anfangsZeit nach f.endZeit
                                 if reservierung.endZeit <= form.cleaned_data.get("anfangsZeit") or reservierung.anfangsZeit >= form.cleaned_data.get("endZeit"):
@@ -231,7 +238,7 @@ def reservierung_form(request):
                 reserv.endDatum = form.cleaned_data.get("endDatum")
                 reserv.anfangsZeit = form.cleaned_data.get("anfangsZeit")
                 reserv.endZeit = form.cleaned_data.get("endZeit")
-                reserv.taeglich = form.cleaned_data.get("taeglich")
+                reserv.täglich = form.cleaned_data.get("täglich")
                 reserv.save()
                 return HttpResponseRedirect(reverse('reservierung:index'))
             else:
@@ -250,9 +257,9 @@ def reservierung_form(request):
                             for room_reserv in room_reservs:
                                 # liegt die reservierung in dem zeitraum einer
                                 # bestehenden Reservierung
-                                if form.cleaned_data.get("taeglich"):
+                                if form.cleaned_data.get("täglich"):
                                     if room_reserv.anfangsDatum < form.cleaned_data.get("anfangsDatum") and form.cleaned_data.get("anfangsDatum") < room_reserv.endDatum:
-                                        if room_reserv.taeglich:
+                                        if room_reserv.täglich:
                                             if room_reserv.endZeit <= form.cleaned_data.get("anfangsZeit") or room_reserv.anfangsZeit > form.cleaned_data.get("endZeit"):
                                                 free_room = True
                                             else:
@@ -320,7 +327,6 @@ def reservierung_form(request):
                     free_rooms = models.Raum.objects.all()
     else:
         form = forms.ReservierungForm()
-    print(free_rooms)
     return render(request, 'reservierung/reservierung_form.html', {'form': form, 'reserv': reserv, 'free_rooms': free_rooms, })
 
 # View zum anzeigen aller Reservierungen des angemeldeten nutzers

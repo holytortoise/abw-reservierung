@@ -9,12 +9,12 @@ class ReservierungForm(forms.Form):
     model = Reservierung()
     choice = model.create_choice()
     reservierterRaum = forms.ChoiceField(choice)
-    reservierungsGrund = forms.CharField(max_length=255)
+    reservierungsGrund = forms.CharField(max_length=40)
     anfangsDatum = forms.DateField()
     endDatum = forms.DateField()
-    anfangsZeit = forms.TimeField()
-    endZeit = forms.TimeField()
-    taeglich = forms.BooleanField(required=False)
+    anfangsZeit = forms.TimeField(help_text='HH:mm')
+    endZeit = forms.TimeField(help_text='HH:mm')
+    täglich = forms.BooleanField(required=False)
 
     def clean(self):
         cleaned_data = super(ReservierungForm, self).clean()

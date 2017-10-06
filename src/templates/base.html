@@ -1,5 +1,5 @@
 <!DOCTYPE html> {% load staticfiles %}
-<html>
+<html lang="de">
 
 <head>
   <meta charset="utf-8">
@@ -7,10 +7,9 @@
 
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
   <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}">
-  <link rel="shortcut icon" type="image/gif" href="{% static 'images/LogoAbw.ico' %}">
   <script src="{% static 'jquery/jquery-3.2.1.min.js' %}"></script>
   <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
-
+  <link rel="shortcut icon" type="image/gif" href="{% static 'images/favicon.ico' %}">
   {% block head %}{% endblock head %}
 </head>
 
@@ -28,7 +27,7 @@
       <div class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
           <li><a href="{% url 'reservierung:form' %}">Reservieren</a></li>
-          <li><a href="{% url 'reservierung:reservierung-list' %}">Reservierung-List</a></li>
+          <li><a href="{% url 'reservierung:reservierung-list' %}">Alle Reservierungen</a></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
           {% if user.is_superuser %}

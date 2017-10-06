@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block titel %}Home{% endblock titel %}
+{% block titel %}ABW-Raumreservierung{% endblock titel %}
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/reservierung.css' %}">
 {% endblock head %}
@@ -11,7 +11,7 @@
   <h1 class="top">Reservierungen</h1>
   <form class="form" method="post">
     {% csrf_token %}
-    <h3 class="kw">KW {{ woche }} {{ jahr }}</h3>
+    <h3 class="kw">{{ start }} - {{ end }}.{{ jahr }}</h3>
     <input id="woche" type="hidden" name="woche" value="{{woche}}">
     <input id="jahr" type="hidden" name="jahr" value="{{jahr}}">
     <input id='current_week' type="hidden" name="current_week" value="{{current_week}}">
@@ -46,11 +46,11 @@
           <tbody>
     {% endif %}
     <tr>
-      <td id="r_von">{{ reserv.reserviert_von }}</td>
-      <td id="r_grund">{{ reserv.reservierungsGrund }}</td>
-      <td id="r_anfang">{{ reserv.anfangsDatum }} {{ reserv.anfangsZeit|date:"G" }}:{{reserv.anfangsZeit|date:"i" }}</td>
-      <td id="r_ende">{{ reserv.endDatum }} {{ reserv.endZeit|date:"G" }}:{{ reserv.endZeit|date:"i" }}</td>
-      {% if reserv.taeglich %}
+      <td id="r_von">{{ reserv.reserviert_von.last_name }}</td>
+      <td class="r_grund">{{ reserv.reservierungsGrund }}</td>
+      <td id="r_anfang">{{ reserv.anfangsDatum|date:"d.m.o" }} {{ reserv.anfangsZeit|date:"H:i" }}</td>
+      <td id="r_ende">{{ reserv.endDatum|date:"d.m.o" }} {{ reserv.endZeit|date:"H:i" }}</td>
+      {% if reserv.täglich %}
           <td>Ja</td>
           {% else %}
           <td>Nein</td>

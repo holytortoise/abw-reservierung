@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 {% extends "base.html" %}
 {% load staticfiles %}
-{% block titel %}Reservierung-List{% endblock titel %}
+{% block titel %}Alle Reservierungen{% endblock titel %}
 {% block head %}<link rel="stylesheet" href="{% static 'css/reservierung.css' %}">{% endblock head %}
 {% block content %}
   <div class="wrapper">
@@ -25,11 +25,11 @@
     {% endif %}
     <tr>
       <td>{{ reservierung.reservierterRaum }}</td>
-      <td id="r_von">{{ reservierung.reserviert_von }}</td>
-      <td id="r_grund">{{ reservierung.reservierungsGrund }}</td>
-      <td id="r_anfang">{{ reservierung.anfangsDatum|date:"j N o" }} {{reservierung.anfangsZeit|date:"H:i" }}</td>
-      <td id="r_ende">{{ reservierung.endDatum|date:"j N o" }} {{ reservierung.endZeit|date:"H:i" }}</td>
-      {% if reservierung.taeglich %}
+      <td id="r_von">{{ reservierung.reserviert_von.last_name }}</td>
+      <td class="r_grund">{{ reservierung.reservierungsGrund }}</td>
+      <td id="r_anfang">{{ reservierung.anfangsDatum|date:"d.m.o"}} {{reservierung.anfangsZeit|date:"H:i" }}</td>
+      <td id="r_ende">{{ reservierung.endDatum|date:"d.m.o"}} {{ reservierung.endZeit|date:"H:i" }}</td>
+      {% if reservierung.täglich %}
           <td>Ja</td>
           {% else %}
           <td>Nein</td>

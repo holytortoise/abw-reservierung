@@ -1,5 +1,8 @@
 from django.conf.urls import url
+from django.views.generic.base import RedirectView
+from django.contrib.staticfiles.storage import staticfiles_storage
 from . import views
+
 
 app_name = 'reservierung'
 urlpatterns = [

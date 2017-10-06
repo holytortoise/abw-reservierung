@@ -6,10 +6,11 @@
 {% block content %}
 
   <h1>Reservierung Nr.{{reservierung.id}}</h1>
-  <h3>Reserviert von: {{reservierung.reserviert_von}}</h3>
+  <h3>Reserviert von: {{reservierung.reserviert_von.last_name}}</h3>
   <h3>Reservierter Raum: {{reservierung.reservierterRaum}}</h3>
   <h3>Reservierungs Grund: {{reservierung.reservierungsGrund}}</h3>
-  <h3>Von {{reservierung.anfangsDatum}} {{reservierung.anfangsZeit}} bis
-  {{reservierung.endDatum}} {{reservierung.endZeit}}</h3>
+  <h3>Von {{reservierung.anfangsDatum|date:"d.m.o"}} {{reservierung.anfangsZeit|date:"H:i"}} bis
+  {{reservierung.endDatum|date:"d.m.o"}} {{reservierung.endZeit|date:"H:i"}}</h3>
+  <h3>Täglich: {% if reservierung.täglich %}Ja{% else %}Nein{% endif %}</h3>
 
 {% endblock content %}
