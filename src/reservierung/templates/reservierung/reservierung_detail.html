@@ -6,6 +6,7 @@
 
   <h2>Reservierter Raum: {{reservierung.reservierterRaum}}</h2>
   <h3>Reserviert von: {{reservierung.reserviert_von.last_name}}</h3>
+  <h3>Reserviert für: {{ reservierung.reserviert_für }}</h3>
   <h3>Reservierungs Grund: {{reservierung.reservierungsGrund}}</h3>
   <h3>Von {{reservierung.anfangsDatum|date:"d.m.o"}} {{reservierung.anfangsZeit|time:"H:i"}} bis
   {{reservierung.endDatum|date:"d.m.o"}} {{reservierung.endZeit|time:"H:i"}}</h3>
