@@ -37,6 +37,7 @@
     <h2 class="top">Es existiert bereits eine Reservierung</h2>
     <table class="table table-bordered tabelle">
       <thead>
+        <th>Von</th>
         <th>Für</th>
         <th>Grund</th>
         <th>Beginn</th>
@@ -45,6 +46,7 @@
       </thead>
       <tbody>
         <tr>
+          <td><h3>{{reserv.reserviert_von}}</h3></td>
           <td id="td_user"><h3>{{ reserv.reserviert_für }}</h3></td>
           <td><h3>{{ reserv.reservierungsGrund}}</h3></td>
           <td id="td_anfang"><h3>{{ reserv.anfangsDatum }} {{reserv.anfangsZeit}}</h3></td>

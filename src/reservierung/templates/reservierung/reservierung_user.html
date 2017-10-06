@@ -18,6 +18,7 @@
       </div>
       <table class="table table-bordered">
         <thead>
+          <th>Von</th>
           <th>Für</th>
           <th>Grund</th>
           <th>Anfang</th>
@@ -28,6 +29,7 @@
         <tbody>
   {% endif %}
   <tr>
+    <td>{{ reserv.reserviert_von}}</td>
     <td id="r_von">{{ reserv.reserviert_für }}</td>
     <td class="r_grund">{{ reserv.reservierungsGrund }}</td>
     <td id="r_anfang">{{ reserv.anfangsDatum|date:"d.m.o"}} {{ reserv.anfangsZeit|date:"H:i" }}</td>
