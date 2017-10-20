@@ -26,16 +26,18 @@
   <h3 class="top"  style="color:red;">Es existiert bereits eine Reservierung</h3>
   <table class="table table-bordered tabelle">
     <thead>
-      <th>Reservnr.</th>
       <th>Von</th>
+      <th>Für</th>
+      <th>Grund</th>
       <th>Beginn</th>
       <th>Ende</th>
       <th>Details</th>
     </thead>
     <tbody>
       <tr>
-        <td id="td_nr">{{ reserv.id }}</td>
-        <td id="td_user">{{ reserv.reserviert_von }}</td>
+        <td>{{ reserv.reserviert_von }}</td>
+        <td id="td_nr">{{ reserv.reserviert_für }}</td>
+        <td id="td_user">{{ reserv.reservierungsGrund }}</td>
         <td id="td_anfang">{{ reserv.anfangsDatum }} {{reserv.anfangsZeit}}</td>
         <td id="td_ende">{{ reserv.endDatum}} {{ reserv.endZeit}}</td>
         <td id="td_details"><a href="{% url 'reservierung:reservierung-detail' pk=reserv.id %}"><span class="glyphicon glyphicon-info-sign"></span> Details</a></td>

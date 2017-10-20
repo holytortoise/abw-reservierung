@@ -22,7 +22,7 @@ class ReservierungUpdate(LoginRequiredMixin, UpdateView):
     login_url = 'account:login'
     redirect_field_name = 'redirect_to'
     model = models.Reservierung
-    fields = ['reservierterRaum', 'reservierungsGrund', 'anfangsDatum',
+    fields = ['reserviert_für','reservierterRaum', 'reservierungsGrund', 'anfangsDatum',
               'endDatum', 'anfangsZeit', 'endZeit']
 
 
@@ -230,6 +230,10 @@ def reservierung_form(request):
             if moeglich:
                 reserv = models.Reservierung()
                 reserv.reserviert_von = request.user
+                if form.cleaned_data.get("reserviertFür") == "":
+                    reserv.reserviert_für = request.user.last_name
+                else:
+                    reserv.reserviert_für = form.cleaned_data.get("reserviertFür")
                 reserv.reservierterRaum = models.Raum.objects.get(
                     id=form.cleaned_data.get("reservierterRaum"))
                 reserv.reservierungsGrund = form.cleaned_data.get(

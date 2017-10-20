@@ -48,6 +48,7 @@
 <table class="table table-bordered">
   <thead>
     <th>Von</th>
+    <th>Für</th>
     <th>Grund</th>
     <th>Beginn</th>
     <th>Ende</th>
@@ -55,7 +56,8 @@
   </thead>
 {% for reservierung  in reservierungen %}
     <tr>
-      <td><h4>{{reservierung.reserviert_von.last_name}}</h4></td>
+      <td><h4>{{reservierung.reserviert_von}}</h4></td>
+      <td><h4>{{reservierung.reserviert_für}}</h4></td>
       <td><h4>{{reservierung.reservierungsGrund}}</h4></td>
       <td><h4>{{reservierung.anfangsDatum|date:"d.m.o"}} {% if reservierung.anfangsZeit is None %}
         {% else %} {{reservierung.anfangsZeit|time:"H:i"}} {% endif %}</h4></td>

@@ -8,6 +8,7 @@ class ReservierungForm(forms.Form):
     choice = ()
     model = Reservierung()
     choice = model.create_choice()
+    reserviertFür = forms.CharField(max_length=40,required=False)
     reservierterRaum = forms.ChoiceField(choice)
     reservierungsGrund = forms.CharField(max_length=40)
     anfangsDatum = forms.DateField()
