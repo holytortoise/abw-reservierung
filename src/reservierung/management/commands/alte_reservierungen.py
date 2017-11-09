@@ -27,5 +27,4 @@ def alte_reservierungen():
     reservierungen = models.Reservierung.objects.all()
     for reservierung in reservierungen:
         if reservierung.endDatum < datetime.date.today():
-            print(reservierung)
             reservierung.delete()
