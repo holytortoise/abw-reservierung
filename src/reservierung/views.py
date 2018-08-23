@@ -3,8 +3,8 @@ from django.views.generic import TemplateView, ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView, FormView
 from django.views.generic.dates import WeekArchiveView
 from django.urls import reverse_lazy, reverse
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin,PermissionRequiredMixin,AccessMixin
+from django.contrib.auth.decorators import login_required, permission_required
 from django.http import HttpResponseRedirect
 from django import forms as d_forms
 import datetime
@@ -18,7 +18,9 @@ class ReservierungList(ListView):
     context_object_name = 'reservierungen'
 
 
-class ReservierungUpdate(LoginRequiredMixin, UpdateView):
+class ReservierungUpdate(LoginRequiredMixin, UpdateView, PermissionRequiredMixin,AccessMixin):
+    permission_required = 'reservierung.can_change_reservierung'
+    raise_exception = True
     login_url = 'account:login'
     redirect_field_name = 'redirect_to'
     model = models.Reservierung
@@ -26,7 +28,9 @@ class ReservierungUpdate(LoginRequiredMixin, UpdateView):
               'endDatum', 'anfangsZeit', 'endZeit']
 
 
-class ReservierungDelete(LoginRequiredMixin, DeleteView):
+class ReservierungDelete(LoginRequiredMixin, DeleteView,PermissionRequiredMixin,AccessMixin):
+    permission_required = 'reservierung.can_change_reservierung'
+    raise_exception = True
     login_url = 'account:login'
     redirect_field_name = 'redirect_to'
     model = models.Reservierung
